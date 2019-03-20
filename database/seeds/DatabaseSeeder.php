@@ -14,12 +14,21 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        $this->truncateTables(['Area','Users', 'Permissions', 'Roles']),
-
+       // $this->truncateTables(['Area','Permissions','Users','']);
+        
+        $this->call(PermissionsTableSeeder::class);
+        $this->call(AreasTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-         $this->call(PermissionsTableSeeder::class);
-        $this->call(RolesTableSeeder::class);
-         $this->call(AreasTableSeeder::class);
+
+        $this->call(EdificiosTableSeeder::class);
+        $this->call(DependenciasTableSeeder::class);
+        $this->call(ClientesTableSeeder::class);
+        $this->call(TicketsTableSeeder::class);
+        $this->call(TiposTableSeeder::class);
+        $this->call(EquiposTableSeeder::class);
+        $this->call(PerifericosTableSeeder::class);
+        $this->call(CaracteristicasTableSeeder::class);
+         
     }
     protected function truncateTables(array $tables){
         

@@ -15,10 +15,13 @@ class CreateDependenciasTable extends Migration
     {
         Schema::create('dependencias', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre')->nullable();
-            $table->string('piso')->nullable();
+            $table->string('nombre');
+            $table->string('piso');
+            $table->unsignedInteger('edificio_id');
             $table->foreign('edificio_id')->references('id')->on('edificios');
-            $table->string('estado_bd')->nullable();
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+           $table->softDeletes(); //Nueva línea, para el borrado lógico
             $table->timestamps();
         });
     }

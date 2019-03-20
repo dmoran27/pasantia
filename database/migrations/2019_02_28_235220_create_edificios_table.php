@@ -15,8 +15,10 @@ class CreateEdificiosTable extends Migration
     {
         Schema::create('edificios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre')->nullable();
-            $table->string('estado_bd')->nullable();
+            $table->string('nombre');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->softDeletes(); //Nueva línea, para el borrado lógico
             $table->timestamps();
         });
     }

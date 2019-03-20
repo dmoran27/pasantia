@@ -15,6 +15,8 @@ class AreaController extends Controller
     public function index()
     {
         //
+        $areas=Area::all();
+        return view('areas.index', compact('areas'));
     }
 
     /**
@@ -25,6 +27,8 @@ class AreaController extends Controller
     public function create()
     {
         //
+        return redirect()->route('register');
+
     }
 
     /**
@@ -36,6 +40,9 @@ class AreaController extends Controller
     public function store(Request $request)
     {
         //
+
+        Area::create($request->all());
+        return redirect()->route('area.index');
     }
 
     /**
@@ -47,6 +54,12 @@ class AreaController extends Controller
     public function show(Area $area)
     {
         //
+
+        $areas=Area::findOrFail($area);
+       // return $areas;
+        return view('areas.show', compact('areas'));
+
+
     }
 
     /**
@@ -58,6 +71,9 @@ class AreaController extends Controller
     public function edit(Area $area)
     {
         //
+        $areas=Area::findOrFail($area);
+        return view('areas.edit', compact('areas'));
+
     }
 
     /**
@@ -70,6 +86,10 @@ class AreaController extends Controller
     public function update(Request $request, Area $area)
     {
         //
+        
+        Area::findOrFail($area)->update($request->all($area));
+        return redirect()->route('area.index');
+
     }
 
     /**
@@ -81,5 +101,8 @@ class AreaController extends Controller
     public function destroy(Area $area)
     {
         //
+        Area::findOrFail($area)->delete();
+        return redirect()->route('area.index');
+
     }
 }

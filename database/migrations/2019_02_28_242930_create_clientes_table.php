@@ -15,16 +15,20 @@ class CreateClientesTable extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre')->nullable();
-            $table->string('apellido')->nullable();
+            $table->string('nombre');
+            $table->string('apellido');
             $table->string('cedula');
-            $table->string('telefono');
-            $table->string('sexo')->nullable();
+            $table->string('telefono')->nullable();
+            $table->enum('sexo', ['Femenino', 'Masculino']);    
             $table->string('email')->unique();
-            $table->string('tipo');
+            $table->enum('tipo', ['Tecnico ORTSI', 'Profesor','Administrativo', 'Estudiante','Directivo', 'Otros']);   
+            $table->unsignedInteger('dependencia_id'); 
             $table->foreign('dependencia_id')->references('id')->on('dependencias');
-            $table->string('estado_bd')->nullable();
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->softDeletes(); //Nueva línea, para el borrado lógico
             $table->timestamps();
+
         });
     }
 

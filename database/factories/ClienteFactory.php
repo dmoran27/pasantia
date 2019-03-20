@@ -5,16 +5,16 @@ use Faker\Generator as Faker;
 $factory->define(App\Cliente::class, function (Faker $faker) {
     return [
         //
-        =>$faker->sentence,
+       
           'nombre'=>$faker->name,
             'apellido' => $faker->firstName,
-            'cedula' => str_random(8),
+            'cedula' => mt_rand(10000000,99999999),
             'telefono' => $faker->phoneNumber,
-            'sexo' => $faker-> randomElement(array $array = array('F', 'M')),
+            'sexo' => $faker-> randomElement(['1', '2']),
             'email' => $faker->unique()->safeEmail,
-            'tipo' => $faker->randomElement(array $array = array('estudiante', 'tecnico', 'cliente')),
-            'dependencia_id'=> $faker->str_random(1),
-            'estado_bd' => $faker->randomElement(array $array = array('modificado_nuevo', 'modificado_anterior', 'creado','eliminado')),
+            'tipo' => $faker->randomElement(['Tecnico ORTSI', 'Profesor','Administrativo', 'Estudiante','Directivo', 'Otros']),
+            'dependencia_id'=> mt_rand(1,9),
+           'user_id'=> mt_rand(1,9),
     ];
-    ];
+    
 });

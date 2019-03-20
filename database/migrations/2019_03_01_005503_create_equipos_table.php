@@ -15,19 +15,20 @@ class CreateEquiposTable extends Migration
     {
         Schema::create('equipos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre')->nullable();
-            $table->string('tipo')->nullable();
+            $table->string('nombre');
+            
             $table->string('identificador')->unique();
-            $table->string('marca');
-            $table->string('modelo');
-            $table->string('serial');
-            $table->foreign('area_id')->references('id')->on('areas');
-            $table->string('estado_equipo');
-            $table->string('perteneciente');
-            $table->string('Observacion');
+            $table->string('marca')->nullable();
+            $table->string('modelo')->nullable();
+            $table->string('serial')->nullable();
+            $table->enum('estado_equipo',['nuevo', 'remplazado', 'dañado', 'obsoleto']);
+            $table->enum('perteneciente', ['si', 'no']);
+            $table->string('observacion')->nullable();
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('tipo_id');
             $table->foreign('user_id')->references('id')->on('users');
-              $table->string('estado_bd')->nullable();
-
+            $table->foreign('tipo_id')->references('id')->on('tipos');
+            $table->softDeletes(); //Nueva línea, para el borrado lógico
             $table->timestamps();
 
         });

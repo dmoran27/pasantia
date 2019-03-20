@@ -15,16 +15,17 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre')->nullable();
-            $table->string('apellido')->nullable();
-            $table->string('cedula')->nullable();
-            $table->string('telefono');
-            $table->string('sexo')->nullable();            
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->string('cedula');
+            $table->string('telefono')->nullable();
+            $table->enum('sexo', ['Femenino', 'Masculino']);          
+            $table->unsignedInteger('area_id');  
             $table->foreign('area_id')->references('id')->on('areas');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->string('password');
-            $table->string('estado_bd')->nullable();
             $table->rememberToken();
+            $table->softDeletes(); //Nueva línea, para el borrado lógico
             $table->timestamps();
         });
     }

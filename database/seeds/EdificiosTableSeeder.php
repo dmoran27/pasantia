@@ -12,5 +12,6 @@ class EdificiosTableSeeder extends Seeder
     public function run()
     {
         //
+        factory(App\Edificio::class,10)->create();
     }
 }

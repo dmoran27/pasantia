@@ -15,7 +15,9 @@ class CreateAreasTable extends Migration
     {
         Schema::create('areas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre')->nullable();
+            $table->string('nombre');
+            $table->text('descripcion');
+            $table->softDeletes(); //Nueva línea, para el borrado lógico
             $table->timestamps();
         });
     }

@@ -12,5 +12,6 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         //
+        
     }
 }

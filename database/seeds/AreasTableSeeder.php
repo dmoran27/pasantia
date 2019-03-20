@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use App\Area;
 class AreasTableSeeder extends Seeder
 {
     /**
@@ -12,6 +12,15 @@ class AreasTableSeeder extends Seeder
     public function run()
     {
         //
-        
+         Area::create([
+
+    	'nombre'=>'CAU',
+        'descripcion'=>'Coordinacion de atencion a usuarios',
+    	]);
+          Area::create([
+
+    	'nombre'=>'CPO',
+        'descripcion'=>'Coordinacion de produccion y operaciones',
+    	]);
     }
 }

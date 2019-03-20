@@ -7,23 +7,15 @@ $factory->define(App\Ticket::class, function (Faker $faker) {
         //
  			
 
- 'nombre'=>$faker->name,
-           
-            
-         'tipo'=>$faker->name,
+        
             'identificador'=> str_random(18),
-            'marca'=> str_random(8),
-            'modelo'=> str_random(8),
-            'serial'=> str_random(8),
-            'estado_equipo'=> $faker->randomElement(array $array = array('reemplazado', 'obsoleto', 'nuevo')),
-            'perteneciente'=> $faker->randomElement(array $array = array('no', 'si')),
-            'Observacion'=>$faker->sentence,
-           	'area_id'=> str_random(1),
-            'estado_bd' => $faker->randomElement(array $array = array('modificado_nuevo', 'modificado_anterior', 'eliminado')), 
-			'fecha_i' =>$faker->timezone,
-            'fecha_c'=>$faker->timezone,
-
-
-
+            'estado'=> $faker->randomElement(['Asignado','Abierto','Cerrado','En espera']),
+            'accion'=> $faker->randomElement(['Solventado','Revisado','Sin Solucion']),
+            'prioridad'=> $faker->randomElement(['Alta','Media','Baja']),
+            'observacion'=>$faker->sentence,
+            'tiempo_i'=>$faker->timezone,
+            'tiempo_c'=>$faker->timezone,
+            'user_id'=>mt_rand(1,9),
+            'cliente_id'=>mt_rand(1,9),
     ];
 });

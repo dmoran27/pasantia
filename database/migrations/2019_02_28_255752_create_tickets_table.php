@@ -17,15 +17,17 @@ class CreateTicketsTable extends Migration
             
             $table->increments('id');
             $table->string('identificador');
-            $table->string('accion');
-            $table->string('prioridad');
-            $table->string('observacion');
-            $table->string('fecha_i');
-            $table->string('fecha_c');
+             $table->enum('estado',['Asignado','Abierto','Cerrado','En espera']);
+            $table->enum('accion',['Solventado','Revisado','Sin Solucion']);
+            $table->enum('prioridad',['Alta','Media','Baja']);
+            $table->text('observacion')->nullable();
+            $table->string('tiempo_i');
+            $table->string('tiempo_c');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('cliente_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('Observacion');
-            $table->foreign('cliente_id')->references('id')->on('clientess');
-            $table->string('estado_bd')->nullable();
+            $table->foreign('cliente_id')->references('id')->on('clientes');
+            $table->softDeletes(); //Nueva línea, para el borrado lógico
             $table->timestamps();
         });
     }
