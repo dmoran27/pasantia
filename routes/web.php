@@ -16,14 +16,19 @@ Route::get('/', function () {
 });
 
 Route::get('test', function(){
-	/*$user= new App\User;
-	$user->name='diana';
-	$user->password=bcrypt('123123');
-	$user->role='admin';
-	$user->email='dianacmoran27@gmail.com';
-	$user->save(); 
-	return $user;
-*/
+			$user= new App\User;
+			$user->nombre= ' Diana';
+            $user->apellido= ' Moran';
+            $user->cedula= '2727727';
+            $user->telefono= ' 123456';
+            $user->sexo= ' Femenino';
+            $user->area_id= '1';
+            $user->email='diana27@gmail.com';
+            $user->password=bcrypt('123123');
+			$user->save(); 
+			 User::create($user);
+			return $user;
+
 });
 
 
