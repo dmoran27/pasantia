@@ -24,6 +24,7 @@
     <div id="app">
         @guest
             @yield('login')
+            
         @else
         
 

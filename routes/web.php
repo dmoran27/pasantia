@@ -15,21 +15,6 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('test', function(){
-			$user= new App\User;
-			$user->nombre= ' Diana';
-            $user->apellido= ' Moran';
-            $user->cedula= '2727727';
-            $user->telefono= ' 123456';
-            $user->sexo= ' Femenino';
-            $user->area_id= '1';
-            $user->email='diana27@gmail.com';
-            $user->password=bcrypt('123123');
-			$user->save(); 
-			 User::create($user);
-			return $user;
-
-});
 
 
 
@@ -41,6 +26,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 /*
+
+
+
 Route::resource('edificio','EdificioController');
 Route::resource('tipo','TipoController');
 Route::resource('area','AreaController');
