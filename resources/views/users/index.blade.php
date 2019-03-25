@@ -30,19 +30,21 @@
 				@foreach($users as $user)
 				<tr>
 					<td>{{$user->id}}</td>
-					<td><a href="{{route('users.show', $user->id)}}">{{$user->nombre}} {{$user->apellido}}</a></td>
+					<td><a href="{{route('users.show', $user)}}">{{$user->nombre}} {{$user->apellido}}</a></td>
 					<td>{{$user->email}}</td>
 					<td>{{$user->role}}</td>
 					<td>
 						<div class="d-flex justify-content-center">	
 
-	  							@can('users.create')
+	  							@can('users.show')
 								<a href="{{route('users.show', $user->id)}}" class="btn btn-outline-success m-2">Mostrar</a>
 								@endcan
-	  							@can('users.create')
-								<a href="{{route('users.edit', $user->id)}}" class="btn btn-outline-success m-2">Editar</a>	
+
+	  							@can('users.edit')
+								<a href="{{route('users.edit', $user->id)}}" class="btn btn-outline-success m-2">Editarr</a>
 								@endcan
-	  							@can('users.create')							
+
+	  							@can('users.delete')							
 								<form method="POST" action="{{route('users.destroy', $user->id)}}">
 									@csrf
 									{!!method_field('DELETE')!!}

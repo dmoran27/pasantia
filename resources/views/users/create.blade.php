@@ -72,9 +72,11 @@
 
                             <div class="col-md-6">
                                
-                                <select class="form-control{{ $errors->has('sexo') ? ' is-invalid' : '' }}" name="sexo">
-                                  <option value="Femenino">Femenino</option>
-                                  <option value="Masculido">Masculino</option>
+                                  <select class="form-control{{ $errors->has('sexo') ? ' is-invalid' : '' }}" name="sexo">
+                                    @foreach($enumoption as $sexo)
+                                        <option value="{{$sexo}}" @if($sexo === $users->sexo) selected @else '' @endif >{{$sexo}}</option>
+                                    @endforeach
+
                                 </select>
 
                                 @if ($errors->has('sexo'))
@@ -90,8 +92,9 @@
                             <div class="col-md-6">
                                
                                 <select class="form-control{{ $errors->has('area') ? ' is-invalid' : '' }}" name="area_id">
-                                  <option value=1>CAU</option>
-                                  <option value=2>CPO</option>
+                                    @foreach($areas as $area)
+                                      <option value="{{ $area->id}}">{{ $area->nombre }}</option>
+                                  @endforeach
                                 </select>
 
                                 @if ($errors->has('area'))
@@ -117,6 +120,8 @@
                             </div>
                         </div>
 
+                         
+
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
@@ -138,7 +143,7 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-
+                   
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
 

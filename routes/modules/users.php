@@ -13,4 +13,6 @@
 
 	Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy')->middleware('permission:users.create');
 
-	Route::post('users/{user}', 'UserController@edit')->name('users.edit')->middleware('permission:users.edit');
+	Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')->middleware('permission:users.edit');
+
+	Route::post('users/create', 'UserController@password')->name('users.password')->middleware('permission:users.create');

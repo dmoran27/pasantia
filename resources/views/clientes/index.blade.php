@@ -5,13 +5,13 @@
 @section('content')
 
 <div class="row">
-	  @can('users.create')
+	  @can('clientes.create')
 	<div class="col">
-		<a href="{{route('users.create')}}" class="btn btn-outline-info m-2">Agregar Nuevo Tecnico</a>
+		<a href="{{route('clientes.create')}}" class="btn btn-outline-info m-2">Agregar Nuevo Cliente</a>
 	</div>
 	  @endcan
 	<div class="col">
-		<h2>Tecnicos</h2>
+		<h2>Clientes</h2>
 	</div>
 	
 </div>
@@ -22,28 +22,30 @@
 			<thead>
 				<th>id</th>
 				<th>Nombre</th>
-				<th>Email</th>
-				<th>Role</th>
+				<th>Cedula</th>
+				<th>Tipo</th>
+				<th>Departamento</th>
 				<th>Acciones</th>
 			</thead>
 			<tbody>
-				@foreach($users as $user)
+				@foreach($clientes as $cliente)
 				<tr>
-					<td>{{$user->id}}</td>
-					<td><a href="{{route('users.show', $user->id)}}">{{$user->nombre}} {{$user->apellido}}</a></td>
-					<td>{{$user->email}}</td>
-					<td>{{$user->role}}</td>
+					<td>{{$cliente->id}}</td>
+					<td><a href="{{route('clientes.show', $cliente->id)}}">{{$cliente->nombre}} {{$cliente->apellido}}</a></td>
+					<td>{{$cliente->cedula}}</td>
+					<td>{{$cliente->tipo}}</td>
+					<td>{{$cliente->departamento_id}}</td>
 					<td>
 						<div class="d-flex justify-content-center">	
 
-	  							@can('users.create')
-								<a href="{{route('users.show', $user->id)}}" class="btn btn-outline-success m-2">Mostrar</a>
+	  							@can('clientes.create')
+								<a href="{{route('clientes.show', $cliente->id)}}" class="btn btn-outline-success m-2">Mostrar</a>
 								@endcan
-	  							@can('users.create')
-								<a href="{{route('users.edit', $user->id)}}" class="btn btn-outline-success m-2">Editar</a>	
+	  							@can('clientes.create')
+								<a href="{{route('clientes.edit', $cliente->id)}}" class="btn btn-outline-success m-2">Editar</a>	
 								@endcan
-	  							@can('users.create')							
-								<form method="POST" action="{{route('users.destroy', $user->id)}}">
+	  							@can('clientes.create')							
+								<form method="POST" action="{{route('clientes.destroy', $cliente->id)}}">
 									@csrf
 									{!!method_field('DELETE')!!}
 

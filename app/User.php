@@ -17,6 +17,7 @@ class User extends Authenticatable
      */
     protected $dates = ['deleted_at'];
     protected $table = 'users';
+    protected $sexo = ['Femenino', 'Masculino'];
     protected $fillable = [
            'nombre',
            'apellido',

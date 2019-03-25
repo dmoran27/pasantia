@@ -8,6 +8,8 @@ class Cliente extends Model
 {
     use SoftDeletes; //Implementamos 
     protected $dates = ['deleted_at'];
+    protected $sexo = ['Femenino', 'Masculino'];
+    protected $tipo = ['Tecnico ORTSI', 'Profesor','Administrativo', 'Estudiante','Directivo', 'Otros'];
     protected $table = 'clientes';
     protected $fillable = [
            'nombre',

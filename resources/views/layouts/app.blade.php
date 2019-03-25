@@ -19,6 +19,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel = "hoja de estilo" type = "text / css" href = " https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css " />
+    <script src = " https://code.jquery.com/jquery-3.3.1.min.js " integrity = "sha256-FgpCb / KJQlLNfOu91ta32o / NMZxltwRo8QtmkMRdAu8 =" anonymous "> </script> 
+    <script de script = "text / javascript" src = " https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js "> </script>
 </head>
 <body>
     <div id="app">
@@ -48,7 +51,7 @@
                             <ul class="p-0 m-0 d-flex flex-wrap justify-content-center justify-content-sm-start" id="main-menu">
                                 
                                 <!--enlace de inicio-->
-                                <li><a class="botonBarraNavegacion" href="{{route('home')}}><i class="fa fa-home mr-lg-3"></i><span>Inicio</span></a></li>
+                                <li><a class="botonBarraNavegacion" href="{{route('home')}}"><i class="fa fa-home mr-lg-3"></i><span>Inicio</span></a></li>
                                 
                                 <!--enlace de usuarios-->
                                 @can('users.index')
