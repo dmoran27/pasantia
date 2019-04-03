@@ -89,6 +89,8 @@
                                   <a class="  botonBarraNavegacion " href="{{route('perifericos.index')}}" role="button" id=""> <i class="fa fa-users mr-lg-3"></i><span>Perifericos</span></a>    
                                 </li>
                                 @endcan
+                                  <!--enlace de usuarios-->
+                               
 
 
 

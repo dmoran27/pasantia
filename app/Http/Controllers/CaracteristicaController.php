@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Buider;
 
 class CaracteristicaController extends Controller
 {
@@ -14,8 +16,10 @@ class CaracteristicaController extends Controller
     public function index()
     {
         //
-        $Caracteristicas=Caracteristica::all();
-        return view('caracteristicas.index', compact('caracteristicas'));
+        $caracteristicas=Caracteristica::all();
+        
+        //return view('caracteristicas.index', compact('caracteristicas'));
+        return $caracteristicas;
     }
 
     /**
@@ -26,8 +30,9 @@ class CaracteristicaController extends Controller
     public function create()
     {
         //
-         return view('caracteristicas.create');
-
+         $caracteristicas=Caracteristica::all();
+        return view('caracteristicas.create', compact('caracteristicas'));
+       
     }
 
     /**
@@ -36,26 +41,43 @@ class CaracteristicaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    
+
     public function store(Request $request)
     {
         //
+         $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:255',
+            'propiedad' => 'required|string|max:255',
+            'usuario_id' => 'required|string|max:255',
+
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()
+                        ->route('caracteristicas.create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         Caracteristica::create($request->all());
-        return redirect()->route('Caracteristica.index');
+        return redirect()->route('caracteristicas.index');
     }
+
+
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Caracteristica  $Caracteristica
+     * @param  \App\Caracteristica  $caracteristica
      * @return \Illuminate\Http\Response
      */
-    public function show(Caracteristica $Caracteristica)
+    public function show(Caracteristica $caracteristica)
     {
         //
 
-        $caracteristicas=Caracteristica::findOrFail($Caracteristicas);
-       // return $caracteristicas;
+        $caracteristicas=Caracteristica::findOrFail($caracteristica->id);
         return view('caracteristicas.show', compact('caracteristicas'));
 
 
@@ -64,36 +86,68 @@ class CaracteristicaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Caracteristica  $Caracteristica
+     * @param  \App\Caracteristica  $caracteristica
      * @return \Illuminate\Http\Response
      */
-    public function edit(Caracteristica $Caracteristica)
+    public function edit(Caracteristica $caracteristica)
     {
         //
-        $caracteristicas=Caracteristica::findOrFail($Caracteristicas);
+        
+        $caracteristicas=Caracteristica::findOrFail($caracteristica->id);
+        $caracteristicas=Caracteristica::all();
+        $enumoption = General::getEnumValues('caracteristicas') ;
+       
         return view('caracteristicas.edit', compact('caracteristicas'));
 
     }
+
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Caracteristica  $caracteristica
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update( Request $request, Caracteristica $caracteristica)
     {
         //
+
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:255',
+            'propiedad' => 'required|string|max:255',
+            'usuario_id' => 'required|string|max:255',
+
+        ]);
+
+
+         if ($validator->fails()) {
+            
+           return redirect()
+                        ->route('caracteristicas.edit', $caracteristica)
+                        ->withErrors($validator)
+                        ->withInput();
+            }
+      
+
+        Caracteristica::findOrFail($caracteristica->id)->update($request->all());
+        return redirect()->route('caracteristicas.index');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\caracteristicas  $caracteristicas
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Caracteristica $caracteristica)
     {
         //
+      $caracteristicas=Caracteristica::findOrFail($caracteristica->id)->delete();
+  
+        
+        return redirect()->route('caracteristicas.index');
+
     }
+
 }

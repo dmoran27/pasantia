@@ -33,8 +33,10 @@ class UserController extends Controller
     public function create()
     {
         //
+       
          $areas=Area::all();
          $enumoption = General::getEnumValues('users','sexo') ;
+
         return view('users.create', compact('areas', 'enumoption'));
        
     }

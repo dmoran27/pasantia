@@ -27,7 +27,20 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/register';
+    protected $redirectTo = '/users/index';
+    protected $dates = ['deleted_at'];
+    protected $table = 'users';
+    protected $sexo = ['Femenino', 'Masculino'];
+    protected $fillable = [
+           'nombre',
+           'apellido',
+           'cedula',
+           'telefono',
+           'sexo',          
+           'area_id',  
+           'email',
+           'password',
+    ];
 
     /**
      * Create a new controller instance.
@@ -80,3 +93,4 @@ class RegisterController extends Controller
         ]);
     }
 }
+    

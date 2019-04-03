@@ -11,8 +11,12 @@ class Ticket extends Model
 
     protected $dates = ['deleted_at'];
     protected $table = 'tickets';
+    protected $estado =['Asignado','Abierto','Cerrado','En espera'];
+    protected $accion=['Solventado','Revisado','Sin Solucion'];
+    protected $prioridad=['Alta','Media','Baja'];
     protected $fillable = [
-  
+
+
             'identificador',
             'estado',
             'accion',

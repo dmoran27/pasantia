@@ -74,7 +74,7 @@
                                
                                   <select class="form-control{{ $errors->has('sexo') ? ' is-invalid' : '' }}" name="sexo">
                                     @foreach($enumoption as $sexo)
-                                        <option value="{{$sexo}}" @if($sexo === $users->sexo) selected @else '' @endif >{{$sexo}}</option>
+                                        <option value="{{$sexo}}" >{{$sexo}}</option>
                                     @endforeach
 
                                 </select>

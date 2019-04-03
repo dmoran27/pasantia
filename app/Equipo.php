@@ -11,6 +11,8 @@ class Equipo extends Model
 
     protected $dates = ['deleted_at'];
      protected $table = 'equipos';
+    protected $perteneciente= ['si', 'no'];
+    protected $estado_equipo=['nuevo', 'remplazado', 'dañado', 'obsoleto'];
     protected $fillable = [
            'nombre',    
             'identificador',

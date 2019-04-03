@@ -8,8 +8,8 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('users.store') }}" aria-label="{{ __('Register') }}">
-                        @csrf
+                    <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+                        {{ csrf_field() }}
 
                         <div class="form-group row">
                             <label for="nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>

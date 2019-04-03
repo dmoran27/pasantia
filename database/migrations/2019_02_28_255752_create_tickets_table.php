@@ -17,7 +17,7 @@ class CreateTicketsTable extends Migration
             
             $table->increments('id');
             $table->string('identificador');
-             $table->enum('estado',['Asignado','Abierto','Cerrado','En espera']);
+            $table->enum('estado',['Asignado','Abierto','Cerrado','En espera']);
             $table->enum('accion',['Solventado','Revisado','Sin Solucion']);
             $table->enum('prioridad',['Alta','Media','Baja']);
             $table->text('observacion')->nullable();

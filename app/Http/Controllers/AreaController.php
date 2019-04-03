@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Area;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Buider;
 
 class AreaController extends Controller
 {
@@ -16,7 +17,9 @@ class AreaController extends Controller
     {
         //
         $areas=Area::all();
-        return view('areas.index', compact('areas'));
+        
+        //return view('areas.index', compact('areas'));
+        return $areas;
     }
 
     /**
@@ -27,8 +30,9 @@ class AreaController extends Controller
     public function create()
     {
         //
-        return redirect()->route('register');
-
+         $areas=Area::all();
+        return view('areas.create', compact('areas'));
+       
     }
 
     /**
@@ -37,13 +41,30 @@ class AreaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    
+
     public function store(Request $request)
     {
         //
+         $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string|max:255',
+
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()
+                        ->route('areas.create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         Area::create($request->all());
-        return redirect()->route('area.index');
+        return redirect()->route('areas.index');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -55,8 +76,7 @@ class AreaController extends Controller
     {
         //
 
-        $areas=Area::findOrFail($area);
-       // return $areas;
+        $areas=Area::findOrFail($area->id);
         return view('areas.show', compact('areas'));
 
 
@@ -71,7 +91,11 @@ class AreaController extends Controller
     public function edit(Area $area)
     {
         //
-        $areas=Area::findOrFail($area);
+        
+        $areas=Area::findOrFail($area->id);
+        $areas=Area::all();
+        $enumoption = General::getEnumValues('areas') ;
+       
         return view('areas.edit', compact('areas'));
 
     }
@@ -83,26 +107,45 @@ class AreaController extends Controller
      * @param  \App\Area  $area
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Area $area)
+    public function update( Request $request, Area $area)
     {
         //
-        
-        Area::findOrFail($area)->update($request->all($area));
-        return redirect()->route('area.index');
+
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string|max:255',
+
+        ]);
+
+
+         if ($validator->fails()) {
+            
+           return redirect()
+                        ->route('areas.edit', $area)
+                        ->withErrors($validator)
+                        ->withInput();
+            }
+      
+
+        Area::findOrFail($area->id)->update($request->all());
+        return redirect()->route('areas.index');
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Area  $area
+     * @param  \App\areas  $areas
      * @return \Illuminate\Http\Response
      */
     public function destroy(Area $area)
     {
         //
-        Area::findOrFail($area)->delete();
-        return redirect()->route('area.index');
+      $areas=Area::findOrFail($area->id)->delete();
+  
+        
+        return redirect()->route('areas.index');
 
     }
+
 }

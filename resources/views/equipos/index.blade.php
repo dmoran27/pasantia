@@ -5,9 +5,9 @@
 @section('content')
 
 <div class="row">
-	  @can('users.create')
+	  @can('equipos.create')
 	<div class="col">
-		<a href="{{route('users.create')}}" class="btn btn-outline-info m-2">Agregar Nuevo Tecnico</a>
+		<a href="{{route('equipos.create')}}" class="btn btn-outline-info m-2">Agregar Nuevo Tecnico</a>
 	</div>
 	  @endcan
 	<div class="col">
@@ -21,29 +21,37 @@
 		<table width="100%" border="1">
 			<thead>
 				<th>id</th>
+				<th>Identificador</th>
 				<th>Nombre</th>
-				<th>Email</th>
-				<th>Role</th>
+				<th>Marca</th>
+				<th>Modelo</th>
+				<th>Serial</th>
+				<th>Estado del equipo</th>
+				<th>Perteneciente</th>
 				<th>Acciones</th>
 			</thead>
 			<tbody>
-				@foreach($users as $user)
+				@foreach($equipos as $equipo)
 				<tr>
-					<td>{{$user->id}}</td>
-					<td><a href="{{route('users.show', $user->id)}}">{{$user->nombre}} {{$user->apellido}}</a></td>
-					<td>{{$user->email}}</td>
-					<td>{{$user->role}}</td>
+					<td>{{$equipo->id}}</td>
+					<td>{{$equipo->identificador}}</td>
+					<td><a href="{{route('equipos.show', $equipo->id)}}">{{$equipo->nombre}} {{$equipo->apellido}}</a></td>
+					<td>{{$equipo->marcal}}</td>
+					<td>{{$equipo->modelo}}</td>
+					<td>{{$equipo->serial}}</td>
+					<td>{{$equipo->estado_equipo}}</td>
+					<td>{{$equipo->perteneciente}}</td>
 					<td>
 						<div class="d-flex justify-content-center">	
 
-	  							@can('users.create')
-								<a href="{{route('users.show', $user->id)}}" class="btn btn-outline-success m-2">Mostrar</a>
+	  							@can('equipos.create')
+								<a href="{{route('equipos.show', $equipo->id)}}" class="btn btn-outline-success m-2">Mostrar</a>
 								@endcan
-	  							@can('users.create')
-								<a href="{{route('users.edit', $user->id)}}" class="btn btn-outline-success m-2">Editar</a>	
+	  							@can('equipos.create')
+								<a href="{{route('equipos.edit', $equipo->id)}}" class="btn btn-outline-success m-2">Editar</a>	
 								@endcan
-	  							@can('users.create')							
-								<form method="POST" action="{{route('users.destroy', $user->id)}}">
+	  							@can('equipos.create')							
+								<form method="POST" action="{{route('equipos.destroy', $equipo->id)}}">
 									@csrf
 									{!!method_field('DELETE')!!}
 

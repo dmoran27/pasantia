@@ -5,12 +5,25 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Registro') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('users.store') }}" aria-label="{{ __('Register') }}">
+                    <form method="POST" action="{{ route('equipos.store') }}" aria-label="{{ __('Registro') }}">
                         @csrf
 
+                        <div class="form-group row">
+                            <label for="identificador" class="col-md-4 col-form-label text-md-right">{{ __('identificador') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="identificador" type="text" class="form-control{{ $errors->has('identificador') ? ' is-invalid' : '' }}" name="identificador" value="{{ old('identificador') }}" required autofocus>
+
+                                @if ($errors->has('identificador'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('identificador') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
 
@@ -26,119 +39,108 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="apellido" class="col-md-4 col-form-label text-md-right">{{ __('Apellido') }}</label>
+                            <label for="marca" class="col-md-4 col-form-label text-md-right">{{ __('marca') }}</label>
 
                             <div class="col-md-6">
-                                <input id="apellido" type="text" class="form-control{{ $errors->has('apellido') ? ' is-invalid' : '' }}" name="apellido" value="{{ old('apellido') }}" required autofocus>
+                                <input id="marca" type="text" class="form-control{{ $errors->has('marca') ? ' is-invalid' : '' }}" name="marca" value="{{ old('marca') }}" required autofocus>
 
-                                @if ($errors->has('apellido'))
+                                @if ($errors->has('marca'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('apellido') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="cedula" class="col-md-4 col-form-label text-md-right">{{ __('cedula') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="cedula" type="text" class="form-control{{ $errors->has('cedula') ? ' is-invalid' : '' }}" name="cedula" value="{{ old('cedula') }}" required autofocus>
-
-                                @if ($errors->has('cedula'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('cedula') }}</strong>
+                                        <strong>{{ $errors->first('marca') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('telefono') }}</label>
+                            <label for="modelo" class="col-md-4 col-form-label text-md-right">{{ __('modelo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" required autofocus>
+                                <input id="modelo" type="text" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" name="modelo" value="{{ old('modelo') }}" autofocus>
 
-                                @if ($errors->has('telefono'))
+                                @if ($errors->has('modelo'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('telefono') }}</strong>
+                                        <strong>{{ $errors->first('modelo') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
-
-
                         <div class="form-group row">
-                            <label for="sexo" class="col-md-4 col-form-label text-md-right">{{ __('sexo') }}</label>
+                            <label for="serial" class="col-md-4 col-form-label text-md-right">{{ __('serial') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="serial" type="text" class="form-control{{ $errors->has('serial') ? ' is-invalid' : '' }}" name="serial" value="{{ old('serial') }}" autofocus>
+
+                                @if ($errors->has('serial'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('serial') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estado_equipo" class="col-md-4 col-form-label text-md-right">{{ __('estado del equipo') }}</label>
 
                             <div class="col-md-6">
                                
-                                <select class="form-control{{ $errors->has('sexo') ? ' is-invalid' : '' }}" name="sexo">
-                                  <option value="Femenino">Femenino</option>
-                                  <option value="Masculido">Masculino</option>
+                                  <select class="form-control{{ $errors->has('estado_equipo') ? ' is-invalid' : '' }}" name="estado_equipo">
+                                    @foreach($enumoption2 as $estado_equipo)
+                                        <option value="{{$estado_equipo}}">{{$estado_equipo}}</option>
+                                    @endforeach
+
                                 </select>
 
-                                @if ($errors->has('sexo'))
+                                @if ($errors->has('estado_equipo'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('sexo') }}</strong>
+                                        <strong>{{ $errors->first('estado_equipo') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="area" class="col-md-4 col-form-label text-md-right">{{ __('area') }}</label>
+                       <div class="form-group row">
+                            <label for="perteneciente" class="col-md-4 col-form-label text-md-right">{{ __('pertenece al la institucion? ') }}</label>
 
                             <div class="col-md-6">
                                
-                                <select class="form-control{{ $errors->has('area') ? ' is-invalid' : '' }}" name="area_id">
-                                  <option value=1>CAU</option>
-                                  <option value=2>CPO</option>
+                                  <select class="form-control{{ $errors->has('perteneciente') ? ' is-invalid' : '' }}" name="perteneciente">
+                                    @foreach($enumoption as $perteneciente)
+                                        <option value="{{$perteneciente}}" >{{$perteneciente}}</option>
+                                    @endforeach
+
                                 </select>
 
-                                @if ($errors->has('area'))
+                                @if ($errors->has('perteneciente'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('area') }}</strong>
+                                        <strong>{{ $errors->first('perteneciente') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div> 
+                         
+                        <div class="form-group row">
+                            <label for="observacion" class="col-md-4 col-form-label text-md-right">{{ __('observacion') }}</label>
+
+                            <div class="col-md-6">
+                                <textarea id="observacion" class="form-control{{ $errors->has('observacion') ? ' is-invalid' : '' }}" name="observacion" value="{{ old('observacion') }}" autofocus></textarea>
+
+                                @if ($errors->has('observacion'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('observacion') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                         <div class="form-group row">
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                                <input id="user_id" type="hidden" class="hidden" name="user_id" value="{{ Auth::user()->id }}" required>
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
+                       
+                       
+                   
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
 

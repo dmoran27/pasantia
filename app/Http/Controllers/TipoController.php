@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Buider;
 
 class TipoController extends Controller
 {
@@ -14,6 +16,10 @@ class TipoController extends Controller
     public function index()
     {
         //
+        $tipos=Tipo::all();
+        
+        //return view('tipos.index', compact('tipos'));
+        return $tipos;
     }
 
     /**
@@ -24,6 +30,9 @@ class TipoController extends Controller
     public function create()
     {
         //
+         $tipos=Tipo::all();
+        return view('tipos.create', compact('tipos'));
+       
     }
 
     /**
@@ -32,53 +41,115 @@ class TipoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    
+
     public function store(Request $request)
     {
         //
+         $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string|max:255',
+            'tipo' => 'required|string|max:255',
+            'usuario_id' => 'required|string',
+
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()
+                        ->route('tipos.create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        Tipo::create($request->all());
+        return redirect()->route('tipos.index');
     }
+
+
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Tipo  $tipo
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Tipo $tipo)
     {
         //
+
+        $tipos=Tipo::findOrFail($tipo->id);
+        return view('tipos.show', compact('tipos'));
+
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Tipo  $tipo
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tipo $tipo)
     {
         //
+        
+        $tipos=Tipo::findOrFail($tipo->id);
+        $tipos=Tipo::all();
+        $enumoption = General::getEnumValues('tipos') ;
+       
+        return view('tipos.edit', compact('tipos'));
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Tipo  $tipo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update( Request $request, Tipo $tipo)
     {
         //
+
+         $validator = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string|max:255',
+            'tipo' => 'required|string|max:255',
+            'usuario_id' => 'required|string',
+
+        ]);
+
+
+         if ($validator->fails()) {
+            
+           return redirect()
+                        ->route('tipos.edit', $tipo)
+                        ->withErrors($validator)
+                        ->withInput();
+            }
+      
+
+        Tipo::findOrFail($tipo->id)->update($request->all());
+        return redirect()->route('tipos.index');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\tipos  $tipos
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tipo $tipo)
     {
         //
+      $tipos=Tipo::findOrFail($tipo->id)->delete();
+  
+        
+        return redirect()->route('tipos.index');
+
     }
+
 }
