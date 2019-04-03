@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
-
 @section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Rol</div>
 
-
-	<h2>{{$users->id}}</h2> 
-	<h2>{{$users->nombre}}</h2> 
-	<h2>{{$users->apellido}}</h2>
-	<h2>{{$users->cedula}}</h2>
-	<h2>{{$users->telefono}}</h2>
-	<h2>{{$users->sexo}}</h2>
-	<h2>{{$users->area_id}}</h2>
-	<h2>{{$users->created_at}}</h2>
-	<h2>{{$users->updated_at}}</h2>
-
-
-<a href="{{route('users.index')}}">Volver</a>
-@stop
+                <div class="panel-body">                                        
+                    <p><strong>Nombre</strong>     {{ $role->name }}</p>
+                    <p><strong>Slug</strong>       {{ $role->slug }}</p>
+                    <p><strong>Descripción</strong>  {{ $role->description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

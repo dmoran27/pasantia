@@ -4,16 +4,14 @@
 @section('content')
 
 
-	<h2>{{$users->id}}</h2> 
-	<h2>{{$users->nombre}}</h2> 
-	<h2>{{$users->apellido}}</h2>
-	<h2>{{$users->cedula}}</h2>
-	<h2>{{$users->telefono}}</h2>
-	<h2>{{$users->sexo}}</h2>
-	<h2>{{$users->area_id}}</h2>
-	<h2>{{$users->created_at}}</h2>
-	<h2>{{$users->updated_at}}</h2>
+	<h2>{{$softwares->id}}</h2> 
+	<h2>{{$softwares->nombre}}</h2> 
+	<h2>{{$softwares->tipos_id}}</h2>
+	@foreach($caracteristicas as $caracteristica)
+		<h2>{{$caracteristica->nombre}}</h2>
+		<h2>{{$caracteristica->propiedad}}</h2>
+	@endforeach
 
 
-<a href="{{route('users.index')}}">Volver</a>
+<a href="{{route('softwares.index')}}">Volver</a>
 @stop

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Area;
 use App\General;
+use Caffeinated\Shinobi\Models\Role;
+use Caffeinated\Shinobi\Models\Permission;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Buider;
 use Illuminate\Support\Facades\Hash;
@@ -35,9 +37,10 @@ class UserController extends Controller
         //
        
          $areas=Area::all();
+         $roles=Role::all();
          $enumoption = General::getEnumValues('users','sexo') ;
 
-        return view('users.create', compact('areas', 'enumoption'));
+        return view('users.create', compact('areas', 'enumoption', 'roles'));
        
     }
 

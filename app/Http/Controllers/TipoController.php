@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Tipo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Buider;
@@ -18,8 +18,8 @@ class TipoController extends Controller
         //
         $tipos=Tipo::all();
         
-        //return view('tipos.index', compact('tipos'));
-        return $tipos;
+        return view('tipos.index', compact('tipos'));
+        //return $tipos;
     }
 
     /**
@@ -51,7 +51,7 @@ class TipoController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string|max:255',
             'tipo' => 'required|string|max:255',
-            'usuario_id' => 'required|string',
+            'user_id' => 'required|string',
 
         ]);
         
@@ -95,8 +95,6 @@ class TipoController extends Controller
         //
         
         $tipos=Tipo::findOrFail($tipo->id);
-        $tipos=Tipo::all();
-        $enumoption = General::getEnumValues('tipos') ;
        
         return view('tipos.edit', compact('tipos'));
 
@@ -117,7 +115,7 @@ class TipoController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string|max:255',
             'tipo' => 'required|string|max:255',
-            'usuario_id' => 'required|string',
+            'user_id' => 'required|string',
 
         ]);
 

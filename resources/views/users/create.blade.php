@@ -105,6 +105,25 @@
                             </div>
                         </div>
 
+                         <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('role') }}</label>
+
+                            <div class="col-md-6">
+                               
+                                <select class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="role_id">
+                                    @foreach($roles as $role)
+                                      <option value="{{ $role->id}}">{{ $role->name }}</option>
+                                  @endforeach
+                                </select>
+
+                                @if ($errors->has('role'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('role') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -121,7 +140,22 @@
                         </div>
 
                          
+                        <h3>Clave</h3>
+                        <div class="form-group">
+                            <label for="special">Generar Clave</label>
+                             <input type="radio" name="special"  id="generar" value="generar">
+                            <label for="special">Ingresar Clave</label>
+                             <input type="radio" name="special"  id="ingresar" value="ingresar">
+                        </div>
+                        <hr>
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password Generada') }}</label>
 
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password2" required disabled="true">
+                            </div>
+                        </div>
+                       
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 

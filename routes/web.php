@@ -42,7 +42,9 @@ Route::middleware(['auth'])->group(function(){
 	include 'modules/equipos.php';
 	include 'modules/softwares.php';
 	include 'modules/perifericos.php';
-	include 'modules/clientes.php';	
+	include 'modules/clientes.php';
+	include 'modules/caracteristicas.php';
+	include 'modules/tipos.php';	
 /*	//tikets
 	Route::get('tikets', 'TicketController@index')->name('tikets.index')->middleware('permission:tikets.index');
 

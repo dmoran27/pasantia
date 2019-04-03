@@ -56,9 +56,7 @@
                                     {{ __('Iniciar Sesion') }}
                                 </button>
                                 <p class="d-block text-center text-muted mb-0 ">    Aun no se ha registrado? <a href="{{route('users.create')}}" class="link">Registrar</a> </p>
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('FOlvido su clave??') }}
-                                </a>
+                                
                             </div>
                         </div>
                     </form>

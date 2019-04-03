@@ -14,7 +14,6 @@ class Software extends Model
     protected $fillable = [
     'nombre',
     'tipos_id',
-    'caracteristicas_id',
     'descripcion',
     'user_id',
     ];

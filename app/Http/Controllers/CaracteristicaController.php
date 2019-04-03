@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Caracteristica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Buider;
@@ -18,8 +19,8 @@ class CaracteristicaController extends Controller
         //
         $caracteristicas=Caracteristica::all();
         
-        //return view('caracteristicas.index', compact('caracteristicas'));
-        return $caracteristicas;
+        return view('caracteristicas.index', compact('caracteristicas'));
+        //return $caracteristicas;
     }
 
     /**
@@ -94,8 +95,6 @@ class CaracteristicaController extends Controller
         //
         
         $caracteristicas=Caracteristica::findOrFail($caracteristica->id);
-        $caracteristicas=Caracteristica::all();
-        $enumoption = General::getEnumValues('caracteristicas') ;
        
         return view('caracteristicas.edit', compact('caracteristicas'));
 
