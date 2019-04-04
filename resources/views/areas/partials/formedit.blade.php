@@ -1,17 +1,4 @@
-
-@extends('layouts.app')
-
-
-@section('content')
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Editar') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('users.update', $users) }}" aria-label="{{ __('Editar') }}">
+<form method="POST" action="{{ route('users.update', $users) }}" aria-label="{{ __('Editar') }}">
                         @csrf
 							{!!method_field('PUT')!!}
                         <div class="form-group row">
@@ -152,9 +139,3 @@
                         </div>
 
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> 
-@endsection

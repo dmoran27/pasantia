@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Cliente;
-use App\Dependencia;
-use App\General;
+use App\Software;
+use App\Caracteristica;
+use App\Tipo;
+use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
-class ClienteController extends Controller
+class SoftwareController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,7 +32,9 @@ class ClienteController extends Controller
     {
         //
         $caracteristicas=Caracteristica::all();
-        return view('softwares.create', compact('caracteristicas'));
+        $tipos=Tipo::all();
+        return view('softwares.create', compact('caracteristicas','tipos'));
+
        
     }
 
@@ -72,7 +75,7 @@ class ClienteController extends Controller
      * @param  \App\Area  $area
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente $software)
+    public function show(Software $software)
     {
         //
 
@@ -89,16 +92,13 @@ class ClienteController extends Controller
      * @param  \App\Area  $area
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cliente $software)
+    public function edit(Software $software)
     {
         //
         
         $softwares=Softwares::findOrFail($software->id);
-        $dependencias=Caracteristica::all();
-        $enumoption = General::getEnumValues('softwares','sexo') ;
-        $enumoption2 = General::getEnumValues('softwares','tipo') ;
-       
-        return view('softwares.edit', compact('softwares','dependencias','enumoption','enumoption2'));
+        $tipos=Tipo::all();
+        return view('softwares.edit', compact('softwares','tipos'));
 
     }
 
@@ -109,7 +109,7 @@ class ClienteController extends Controller
      * @param  \App\Area  $area
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request, Cliente $software)
+    public function update( Request $request, Software $software)
     {
         //
 
@@ -142,7 +142,7 @@ class ClienteController extends Controller
      * @param  \App\softwares  $softwares
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cliente $software)
+    public function destroy(Software $software)
     {
         //
       $softwares=Softwares::findOrFail($software->id)->delete();
@@ -152,13 +152,6 @@ class ClienteController extends Controller
 
     }
 
-    public function password(Request $request)
-    {
-        //
-      dd($request);
-        return redirect()->route('password');
-
-    }    
 
 
 }

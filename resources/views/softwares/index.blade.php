@@ -11,7 +11,7 @@
 	</div>
 	  @endcan
 	<div class="col">
-		<h2>Tecnicos</h2>
+		<h2>Softwares</h2>
 	</div>
 	
 </div>
@@ -22,28 +22,28 @@
 			<thead>
 				<th>id</th>
 				<th>Nombre</th>
-				<th>Email</th>
-				<th>Role</th>
+				<th>Tipo</th>
+				<th>Descripcion</th>
 				<th>Acciones</th>
 			</thead>
 			<tbody>
-				@foreach($softwares as $user)
+				@foreach($softwares as $software)
 				<tr>
-					<td>{{$user->id}}</td>
-					<td><a href="{{route('softwares.show', $user->id)}}">{{$user->nombre}} {{$user->apellido}}</a></td>
-					<td>{{$user->email}}</td>
-					<td>{{$user->role}}</td>
+					<td>{{$software->id}}</td>
+					<td><a href="{{route('softwares.show', $software->id)}}">{{$software->nombre}} {{$software->apellido}}</a></td>
+					<td>{{$software->email}}</td>
+					<td>{{$software->role}}</td>
 					<td>
 						<div class="d-flex justify-content-center">	
 
 	  							@can('softwares.create')
-								<a href="{{route('softwares.show', $user->id)}}" class="btn btn-outline-success m-2">Mostrar</a>
+								<a href="{{route('softwares.show', $software->id)}}" class="btn btn-outline-success m-2">Mostrar</a>
 								@endcan
 	  							@can('softwares.create')
-								<a href="{{route('softwares.edit', $user->id)}}" class="btn btn-outline-success m-2">Editar</a>	
+								<a href="{{route('softwares.edit', $software->id)}}" class="btn btn-outline-success m-2">Editar</a>	
 								@endcan
 	  							@can('softwares.create')							
-								<form method="POST" action="{{route('softwares.destroy', $user->id)}}">
+								<form method="POST" action="{{route('softwares.destroy', $software->id)}}">
 									@csrf
 									{!!method_field('DELETE')!!}
 

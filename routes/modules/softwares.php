@@ -1,6 +1,6 @@
 <?php
-
 //softwares
+	
 	Route::get('softwares', 'SoftwareController@index')->name('softwares.index')->middleware('permission:softwares.index');
 
 	Route::post('softwares/store', 'SoftwareController@store')->name('softwares.store')->middleware('permission:softwares.store');

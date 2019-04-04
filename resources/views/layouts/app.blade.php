@@ -40,11 +40,7 @@
                 <aside class="col-12 col-sm-2 barra-lateral p-0 mb-0 d-flex  justify-content-center "> 
                         <nav class="m-0  text-center text-lg-left w-100">
                             <div class="logo border2">
-                                <h3 class="">HelpDesk</h3>
-                                <div class="text-center my-3">
-                                        <img src="img/logo.jpg" width=100px class="rounded-circle img-fluid" alt="">
-                                </div>
-                                <p class="text-white text-center ">Administrador</p>
+                                <h3 class="">Sistema ORTSI</h3>
                             </div>  
 
                             <!--enlaces de navegacion-->
@@ -89,15 +85,19 @@
                                   <a class="  botonBarraNavegacion " href="{{route('perifericos.index')}}" role="button" id=""> <i class="fa fa-users mr-lg-3"></i><span>Perifericos</span></a>    
                                 </li>
                                 @endcan
-                                  <!--enlace de usuarios-->
-                               
+                                  <!--enlace de usuarios-->  
+                                   <li class="w-100">
+                                        <a class="botonBarraNavegacion" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Salir') }}
+                                        </a>
 
-
-
-
-
-
-
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                                 
+                                </li>  
                             </ul>                   
                         </nav>
                          <!--FIN DEL MENU LATERAL-->
@@ -107,25 +107,16 @@
                     <div class="row barraHorizontalDos text-white">
                         
                         <div class="col p-0 d-flex justify-content-end">
-                            <a href="#" class="text-white"><i class="fa fa-bell mr-2"></i><span>2</span></a>
+                            <a href="#" class=""><i class="fa fa-bell mr-2"></i><span>2</span></a>  
                                                 <!--Enlace de configuracion-->
-                                            <div class="dropdown">  
-                                                    <a class="dropdown-toggle text-white p-2 ml-3"  href="#" role="button" id="dropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >{{ Auth::user()->nombre }} <span class="caret"></span> </a>
+                                            <div class="dropdown"> 
+                                                    <a class="dropdown-toggle p-2 ml-3"  href="#" role="button" id="dropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Config<i class="fa fa-tools mr-3"></i><span class="caret"></span> </a>
                                                     <div class="dropdown-menu mt-0 p-0 mr-5" aria-labelledby="dropdownMenuLink6">
-                                                        <a href="#" class="dropdown-item"><i class="fa fa-user mr-3"></i><span>Perfil</span></a>
-                                                        <a href="#" class="dropdown-item"><i class="fa fa-tools mr-3"></i><span>Configuraciones</span></a>
-                                                        <div class="dropdown-divider m-0"></div>
-                                                         <div >
-                                                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                                               onclick="event.preventDefault();
-                                                                             document.getElementById('logout-form').submit();">
-                                                                {{ __('Salir') }}
-                                                            </a>
-
-                                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                                @csrf
-                                                            </form>
-                                                        </div>
+                                                        <a href="{{ route('roles.index') }}" class="dropdown-item"><i class="fa fa-user mr-3"></i><span>Roles y Permisos</span></a>
+                                                        <a href="{{ route('caracteristicas.index') }}" class="dropdown-item"><i class="fa fa-user mr-3"></i><span>caracteristicas</span></a>
+                                                         <a href="{{ route('tipos.index') }}" class="dropdown-item"><i class="fa fa-user mr-3"></i><span>tipos</span></a>
+                                                        
+                                                      
                                                                 
                                                     </div>
                                             </div>

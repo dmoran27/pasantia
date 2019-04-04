@@ -1,24 +1,11 @@
-
-@extends('layouts.app')
-
-
-@section('content')
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Editar') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('users.update', $users) }}" aria-label="{{ __('Editar') }}">
+<form method="POST" action="{{ route('users.store') }}" aria-label="{{ __('Register') }}">
                         @csrf
-							{!!method_field('PUT')!!}
+
                         <div class="form-group row">
                             <label for="nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{ $users->nombre }}" required autofocus>
+                                <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{ old('nombre') }}" required autofocus>
 
                                 @if ($errors->has('nombre'))
                                     <span class="invalid-feedback" role="alert">
@@ -32,7 +19,7 @@
                             <label for="apellido" class="col-md-4 col-form-label text-md-right">{{ __('Apellido') }}</label>
 
                             <div class="col-md-6">
-                                <input id="apellido" type="text" class="form-control{{ $errors->has('apellido') ? ' is-invalid' : '' }}" name="apellido" value="{{ $users->apellido}}" required autofocus>
+                                <input id="apellido" type="text" class="form-control{{ $errors->has('apellido') ? ' is-invalid' : '' }}" name="apellido" value="{{ old('apellido') }}" required autofocus>
 
                                 @if ($errors->has('apellido'))
                                     <span class="invalid-feedback" role="alert">
@@ -46,7 +33,7 @@
                             <label for="cedula" class="col-md-4 col-form-label text-md-right">{{ __('cedula') }}</label>
 
                             <div class="col-md-6">
-                                <input id="cedula" type="text" class="form-control{{ $errors->has('cedula') ? ' is-invalid' : '' }}" name="cedula" value="{{ $users->cedula}}" required autofocus>
+                                <input id="cedula" type="text" class="form-control{{ $errors->has('cedula') ? ' is-invalid' : '' }}" name="cedula" value="{{ old('cedula') }}" required autofocus>
 
                                 @if ($errors->has('cedula'))
                                     <span class="invalid-feedback" role="alert">
@@ -59,7 +46,7 @@
                             <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('telefono') }}</label>
 
                             <div class="col-md-6">
-                                <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ $users->telefono}}" required autofocus>
+                                <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" required autofocus>
 
                                 @if ($errors->has('telefono'))
                                     <span class="invalid-feedback" role="alert">
@@ -77,7 +64,7 @@
                                
                                 <select class="form-control{{ $errors->has('sexo') ? ' is-invalid' : '' }}" name="sexo">
                                   <option value="Femenino">Femenino</option>
-                                  <option value="Masculino">Masculino</option>
+                                  <option value="Masculido">Masculino</option>
                                 </select>
 
                                 @if ($errors->has('sexo'))
@@ -106,11 +93,11 @@
                         </div>
 
 
-                          <div class="form-group row">
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{  $users->email}}" required>
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
@@ -146,15 +133,8 @@
                             <div class="col-md-6 offset-md-4">
 
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Actualizar') }}
+                                    {{ __('Regitrar') }}
                                 </button>
                             </div>
                         </div>
-
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> 
-@endsection
