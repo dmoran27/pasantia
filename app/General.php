@@ -2,12 +2,13 @@
 
 namespace App;
 
-
+use Illuminate\Database\Eloquent;
 use Illuminate\Support\Facades\DB;
-class General 
-{
-    //
-     public static function getEnumValues($table, $column) {
+use Illuminate\Database\Eloquent\Model;
+
+
+class General extends Model {
+   public static function getEnumValues($table, $column) {
       $type = DB::select(DB::raw("SHOW COLUMNS FROM $table WHERE Field = '{$column}'"))[0]->Type ;
       preg_match('/^enum\((.*)\)$/', $type, $matches);
       $enum = array();
@@ -19,5 +20,5 @@ class General
       return $enum;
     }
 
-
 }
+

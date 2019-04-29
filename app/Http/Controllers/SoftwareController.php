@@ -20,7 +20,7 @@ class SoftwareController extends Controller
     {
         //
         $softwares=Software::all();
-        return view('softwares.index', compact('softwares'));
+        return view('modules.softwares.index', compact('softwares'));
     }
 
     /**
@@ -33,7 +33,7 @@ class SoftwareController extends Controller
         //
         $caracteristicas=Caracteristica::all();
         $tipos=Tipo::all();
-        return view('softwares.create', compact('caracteristicas','tipos'));
+        return view('modules.softwares.create', compact('caracteristicas','tipos'));
 
        
     }
@@ -81,7 +81,7 @@ class SoftwareController extends Controller
 
         $softwares=Softwares::findOrFail($software->id);
 
-        return view('softwares.show', compact('softwares'));
+        return view('modules.softwares.show', compact('softwares'));
 
 
     }
@@ -98,7 +98,7 @@ class SoftwareController extends Controller
         
         $softwares=Softwares::findOrFail($software->id);
         $tipos=Tipo::all();
-        return view('softwares.edit', compact('softwares','tipos'));
+        return view('modules.softwares.edit', compact('softwares','tipos'));
 
     }
 

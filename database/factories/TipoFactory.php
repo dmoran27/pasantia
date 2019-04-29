@@ -9,7 +9,7 @@ $factory->define(App\Tipo::class, function (Faker $faker) {
 
     	'nombre'=>$faker->name,
     	'descripcion'=>$faker->sentence,
-        'tipo'=>$faker->randomElement(['periferico', 'equipo','software']),
+         'tipo' => $faker->randomElement(['Equipo', 'Software','Periferico','Componente']),
         'user_id'=> mt_rand(1,9),
     ];
 });

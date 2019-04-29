@@ -18,7 +18,7 @@ class TipoController extends Controller
         //
         $tipos=Tipo::all();
         
-        return view('tipos.index', compact('tipos'));
+        return view('modules.tipos.index', compact('tipos'));
         //return $tipos;
     }
 
@@ -31,7 +31,7 @@ class TipoController extends Controller
     {
         //
          $tipos=Tipo::all();
-        return view('tipos.create', compact('tipos'));
+        return view('modules.tipos.create', compact('tipos'));
        
     }
 
@@ -79,7 +79,7 @@ class TipoController extends Controller
         //
 
         $tipos=Tipo::findOrFail($tipo->id);
-        return view('tipos.show', compact('tipos'));
+        return view('modules.tipos.show', compact('tipos'));
 
 
     }
@@ -96,7 +96,7 @@ class TipoController extends Controller
         
         $tipos=Tipo::findOrFail($tipo->id);
        
-        return view('tipos.edit', compact('tipos'));
+        return view('modules.tipos.edit', compact('tipos'));
 
     }
 

@@ -20,7 +20,7 @@ class ClienteController extends Controller
         //
         $clientes=Cliente::all();
         $dependencias=Dependencia::all();
-        return view('clientes.index', compact('clientes', 'dependencias'));
+        return view('modules.clientes.index', compact('clientes', 'dependencias'));
     }
 
     /**
@@ -34,7 +34,7 @@ class ClienteController extends Controller
          $dependencias=Dependencia::all();
          $enumoption = General::getEnumValues('clientes','sexo') ;
          $enumoption2 = General::getEnumValues('clientes','tipo') ;
-        return view('clientes.create', compact('dependencias','enumoption', 'enumoption2'));
+        return view('modules.clientes.create', compact('dependencias','enumoption', 'enumoption2'));
        
     }
 
@@ -86,7 +86,7 @@ class ClienteController extends Controller
 
         $clientes=Cliente::findOrFail($cliente->id);
 
-        return view('clientes.show', compact('clientes'));
+        return view('modules.clientes.show', compact('clientes'));
 
 
     }
@@ -106,7 +106,7 @@ class ClienteController extends Controller
         $enumoption = General::getEnumValues('clientes','sexo') ;
         $enumoption2 = General::getEnumValues('clientes','tipo') ;
        
-        return view('clientes.edit', compact('clientes','dependencias','enumoption','enumoption2'));
+        return view('modules.clientes.edit', compact('clientes','dependencias','enumoption','enumoption2'));
 
     }
 

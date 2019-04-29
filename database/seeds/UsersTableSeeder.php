@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
 
                     'nombre'=> 'Diana',
                     'apellido'=> 'Moran',
-                    'cedula'=> '2727727',
+                    'cedula'=> '27368169',
                     'telefono'=> '123456',
                     'sexo'=> 'Femenino',
                     'area_id'=> 1,                     

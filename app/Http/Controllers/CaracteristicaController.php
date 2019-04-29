@@ -18,8 +18,9 @@ class CaracteristicaController extends Controller
     {
         //
         $caracteristicas=Caracteristica::all();
+        $page_title="Caracteristicas";
         
-        return view('caracteristicas.index', compact('caracteristicas'));
+        return view('modules.caracteristicas.index', compact('caracteristicas', 'page_title'));
         //return $caracteristicas;
     }
 
@@ -32,7 +33,7 @@ class CaracteristicaController extends Controller
     {
         //
          $caracteristicas=Caracteristica::all();
-        return view('caracteristicas.create', compact('caracteristicas'));
+        return view('modules.caracteristicas.create', compact('caracteristicas'));
        
     }
 
@@ -77,9 +78,10 @@ class CaracteristicaController extends Controller
     public function show(Caracteristica $caracteristica)
     {
         //
+          $page_title="Caracteristicas";
 
         $caracteristicas=Caracteristica::findOrFail($caracteristica->id);
-        return view('caracteristicas.show', compact('caracteristicas'));
+        return view('modules.caracteristicas.show', compact('caracteristicas', 'page_title'));
 
 
     }
@@ -95,8 +97,9 @@ class CaracteristicaController extends Controller
         //
         
         $caracteristicas=Caracteristica::findOrFail($caracteristica->id);
+          $page_title="Caracteristicas";
        
-        return view('caracteristicas.edit', compact('caracteristicas'));
+        return view('modules.caracteristicas.edit', compact('caracteristicas', 'page_title'));
 
     }
 

@@ -24,7 +24,7 @@ class UserController extends Controller
         //
         $users=User::all();
         
-        return view('users.index', compact('users'));
+        return view('modules.users.index', compact('users'));
     }
 
     /**
@@ -40,7 +40,7 @@ class UserController extends Controller
          $roles=Role::all();
          $enumoption = General::getEnumValues('users','sexo') ;
 
-        return view('users.create', compact('areas', 'enumoption', 'roles'));
+        return view('modules.users.create', compact('areas', 'enumoption', 'roles'));
        
     }
 
@@ -96,7 +96,7 @@ class UserController extends Controller
         //
 
         $users=User::findOrFail($user->id);
-        return view('users.show', compact('users'));
+        return view('modules.users.show', compact('users'));
 
 
     }
@@ -115,7 +115,7 @@ class UserController extends Controller
         $areas=Area::all();
         $enumoption = General::getEnumValues('users','sexo') ;
        
-        return view('users.edit', compact('users','areas','enumoption'));
+        return view('modules.users.edit', compact('users','areas','enumoption'));
 
     }
 

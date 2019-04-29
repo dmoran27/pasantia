@@ -11,6 +11,7 @@ class Tipo extends Model
 
     protected $dates = ['deleted_at'];
     protected $table = 'tipos';
+    protected $tipo = ['Equipo', 'Software','Periferico','Componente'];
     protected $fillable = [
     'nombre',
     'descripcion',

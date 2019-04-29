@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -22,10 +24,10 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
-
-
-
-/*
+Route::get('/home2', 'HomeController@index2')->name('home2');
+Route::post('/ajax', 'HomeController@store');
+	
+Route::post('posts/changeStatus', array('as' => 'changeStatus', 'uses' => 'EquipoController@changeStatus'));
 
 
 
@@ -33,7 +35,6 @@ Route::resource('edificio','EdificioController');
 Route::resource('tipo','TipoController');
 Route::resource('area','AreaController');
 
-*/
 Route::middleware(['auth'])->group(function(){
 
 	include 'modules/users.php';
@@ -45,7 +46,8 @@ Route::middleware(['auth'])->group(function(){
 	include 'modules/clientes.php';
 	include 'modules/caracteristicas.php';
 	include 'modules/tipos.php';	
-/*	//tikets
+/*	
+//tikets
 	Route::get('tikets', 'TicketController@index')->name('tikets.index')->middleware('permission:tikets.index');
 
 	Route::post('tikets/store', 'TicketController@store')->name('tikets.store')->middleware('permission:tikets.create');
@@ -76,7 +78,7 @@ Route::middleware(['auth'])->group(function(){
 	Route::post('dependencias/{dependencia}', 'DependenciaController@edit')->name('dependencias.edit')->middleware('permission:dependencias.edit');
 
 /*/
-});
 
+});
 
 

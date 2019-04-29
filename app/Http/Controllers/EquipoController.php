@@ -18,8 +18,10 @@ class EquipoController extends Controller
     public function index()
     {
         //
+        
+        $page_title='Equipos';
         $equipos=Equipo::all();
-        return view('equipos.index', compact('equipos'));
+        return view('modules.equipos.index', compact('page_title','equipos'));
     }
 
     /**
@@ -30,10 +32,11 @@ class EquipoController extends Controller
     public function create()
     {
         //
+         $page_title='Crear Equipos';
          $dependencias=Dependencia::all();
          $enumoption = General::getEnumValues('equipos','perteneciente') ;
-         $enumoption2 = General::getEnumValues('equipos','estado_equipo') ;
-        return view('equipos.create', compact('dependencias','enumoption', 'enumoption2'));
+         $enumoption2 = General::getEnumValues('equipos','estado_equipO') ;
+        return view('modules.equipos.create', compact('page_title','dependencias','enumoption', 'enumoption2'));
        
     }
 
@@ -80,13 +83,13 @@ class EquipoController extends Controller
      * @param  \App\Area  $area
      * @return \Illuminate\Http\Response
      */
-    public function show(Equipo $equipo)
+    public function show($id)
     {
         //
 
-        $equipos=Equipo::findOrFail($equipo->id);
-
-        return view('equipos.show', compact('equipos'));
+        $equipos=Equipo::findOrFail($id);
+        $page_title='Equipos';
+        return response()->json($equipos);
 
 
     }
@@ -101,12 +104,12 @@ class EquipoController extends Controller
     {
         //
         
-        $equipos=Equipo::findOrFail($equipo->id);
+        $equipos=Equipo::findOrFail($equipo);
         $dependencias=Dependencia::all();
-        $enumoption = General::getEnumValues('equipos','sexo') ;
-        $enumoption2 = General::getEnumValues('equipos','tipo') ;
-       
-        return view('equipos.edit', compact('equipos','dependencias','enumoption','enumoption2'));
+         $enumoption = General::getEnumValues('equipos','perteneciente') ;
+         $enumoption2 = General::getEnumValues('equipos','estado_equipO') ;
+        $page_title='Editar Equipos';
+        return view('modules.equipos.edit', compact('page_title','equipos','dependencias','enumoption','enumoption2'));
 
     }
 
@@ -154,14 +157,24 @@ class EquipoController extends Controller
      * @param  \App\equipos  $equipos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Equipo $equipo)
+    public function destroy($id)
     {
         //
-      $equipos=Equipo::findOrFail($equipo->id)->delete();
-  
-        
-        return redirect()->route('equipos.index');
+      $equipos=Equipo::findOrFail($id)->delete();
+      return response()->json(['id'=>$id]);
 
+
+    }
+
+    public function changeStatus() 
+    {
+        $id = Input::get('id');
+
+        $equipos = Equipo::findOrFail($id);
+        $equipos->is_published = !$equipos->is_published;
+        $equipos->save();
+
+        return response()->json($equipos);
     }
 
 

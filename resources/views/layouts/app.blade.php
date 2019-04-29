@@ -8,132 +8,143 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'HelpDesk') }}</title>
+    <title>{{ $page_title or "Inicio" }} | ORTSI </title>
+
+ 
+    <!-- Fonts -->
+    <!-- Bootstrap 3.3.7 -->
+        <link href="{{ asset("/bower_components/bootstrap/dist/css/bootstrap.min.css") }}" rel="stylesheet" type="text/css" />
+        <!-- Theme style -->
+        <link href="{{ asset("/bower_components/admin-lte/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
+        <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+              page. However, you can choose any other skin. Make sure you
+              apply the skin class to the body tag so the changes take effect.
+        -->
+        <link href="{{ asset("/bower_components/admin-lte/dist/css/skins/_all-skins.min.css")}}" rel="stylesheet" type="text/css" />
+      
+          <!-- Font Awesome -->
+          <link rel="stylesheet" href="{{ asset("/bower_components/font-awesome/css/font-awesome.min.css")}}">
+          <!-- Ionicons -->
+          <link rel="stylesheet" href="{{ asset("/bower_components/Ionicons/css/ionicons.min.css")}}">
+         
+          <!-- Morris chart -->
+          <link rel="stylesheet" href="{{ asset("/bower_components/morris.js/morris.css")}}">
+          <!-- jvectormap -->
+          <link rel="stylesheet" href="{{ asset("/bower_components/jvectormap/jquery-jvectormap.css")}}">
+          <!-- Date Picker -->
+          <link rel="stylesheet" href="{{ asset("/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css")}}">
+          <!-- Daterange picker -->
+          <link rel="stylesheet" href="{{ asset("/bower_components/bootstrap-daterangepicker/daterangepicker.css")}}">
+          <!-- bootstrap wysihtml5 - text editor -->
+          <link rel="stylesheet" href="{{ asset("/bower_components/admin-lte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}">
+          <!-- DataTables -->
+          <link rel="stylesheet" href="{{ asset("/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css")}}">
+
+          <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+          <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+          <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+          <![endif]-->
+
+          <!-- Google Font -->
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+ <body class="hold-transition skin-black-light sidebar-mini">
+   @guest
+   <div id="app">
+     {{ route('login') }}
+   </div>
+           
+   @else     
+   
+  <div class="wrapper" >
+
+        <!-- Header -->
+      @include('partials.header')
+
+      <!-- Sidebar -->
+      @include('partials.sidebar')
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+
+
+
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            {{ $page_title or "Inicio" }}
+            <small>{{ $page_description or null }}</small>
+          </h1>
+          <!-- You can dynamically generate breadcrumbs here -->
+          <ol class="breadcrumb">
+            <li><a href=" {{ route('home') }}"><i class="fa fa-home"></i>  {{ $page or "Inicio" }}</a></li>
+            <li class="active"> {{ $page_title or null }}</li>
+          </ol>
+        </section>
+
+
+    
+        <!-- Main content -->
+        <section class="content" id="content">          
+          <!-- Your Page Content Here -->
+          @yield('content')
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+
+      <!-- Footer -->
+    @include('partials.footer')
+    @include('partials.sidebar2')
+       @endguest  
+
+      </div>
+
+
+       
+
+
+
+
+  
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- jQuery 3 -->
+    <script src="{{ asset ("/bower_components/jquery/dist/jquery.min.js") }}"  type="text/javascript"></script>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <!-- jQuery UI 1.11.4 -->
+    <script src="{{ asset ("/bower_components/jquery-ui/jquery-ui.min.js")}} "  type="text/javascript"></script>
+    <script>
+      $.widget.bridge('uibutton', $.ui.button);
+    </script>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel = "hoja de estilo" type = "text / css" href = " https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css " />
-    <script src = " https://code.jquery.com/jquery-3.3.1.min.js " integrity = "sha256-FgpCb / KJQlLNfOu91ta32o / NMZxltwRo8QtmkMRdAu8 =" anonymous "> </script> 
-    <script de script = "text / javascript" src = " https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js "> </script>
-</head>
-<body>
-    <div id="app">
-        @guest
-            @yield('login')
-            
-        @else
-        
+    <!-- Bootstrap 3.3.7 -->
+    <script src="{{ asset ("/bower_components/bootstrap/dist/js/bootstrap.min.js") }}"   type="text/javascript"></script>
+  
+    <!-- Slimscroll -->
+    <script src="{{ asset ("/bower_components/jquery-slimscroll/jquery.slimscroll.min.js")}} "  type="text/javascript"></script>
+    <!-- FastClick -->
+    <script src="{{ asset ("/bower_components/fastclick/lib/fastclick.js")}} "  type="text/javascript"></script>
 
-        <div class="container-fluid">
-            <!--CONTENIDO-->                   
-            <div class="row d-flex flex-wrap flex-sm-nowrap p-0">
+   
+    <!-- fullCalendar -->
+    <script src="{{ asset ("/bower_components/moment/moment.js")}} "  type="text/javascript"></script>
+    <script src="{{ asset ("/bower_components/fullcalendar/dist/fullcalendar.min.js")}} "  type="text/javascript"></script>
 
+    <!-- DataTables -->
+    <script src="{{ asset("/bower_components/datatables.net/js/jquery.dataTables.min.js")}} "  type="text/javascript"></script>
+    <script src="{{ asset("/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js")}} "  type="text/javascript"></script>
 
-                <!--MENU LATERAL-->
-                <aside class="col-12 col-sm-2 barra-lateral p-0 mb-0 d-flex  justify-content-center "> 
-                        <nav class="m-0  text-center text-lg-left w-100">
-                            <div class="logo border2">
-                                <h3 class="">Sistema ORTSI</h3>
-                            </div>  
+    
 
-                            <!--enlaces de navegacion-->
-                            <ul class="p-0 m-0 d-flex flex-wrap justify-content-center justify-content-sm-start" id="main-menu">
-                                
-                                <!--enlace de inicio-->
-                                <li><a class="botonBarraNavegacion" href="{{route('home')}}"><i class="fa fa-home mr-lg-3"></i><span>Inicio</span></a></li>
-                                
-                                <!--enlace de usuarios-->
-                                @can('users.index')
-                                <li class="w-100">
-                                  <a class="  botonBarraNavegacion " href="{{route('users.index')}}" role="button" id=""> <i class="fa fa-users mr-lg-3"></i><span>Tecnicos</span></a>
-                                  <div class="dropdown-menu m-0 " aria-labelledby="dropdownMenuLink"><!-- Dropdown menu links -->
-                                        
-                                  </div>
-                                </li>
-                                @endcan
-                                 <!--enlace de clientes-->
-                                @can('clientes.index')
-                                <li class="w-100">
-                                  <a class="  botonBarraNavegacion " href="{{route('clientes.index')}}" role="button" id=""> <i class="fa fa-clientes mr-lg-3"></i><span>Clientes</span></a>
-                                
-                                </li>
-                                @endcan
-                                 <!--enlace de softwares-->
-                                @can('softwares.index')
-                                <li class="w-100">
-                                  <a class="  botonBarraNavegacion " href="{{route('softwares.index')}}" role="button" id=""> <i class="fa fa-clientes mr-lg-3"></i><span>Softwares</span></a>
-                                  
-                                </li>
-                                @endcan
-                                 <!--enlace de equipo-->
-                                @can('equipos.index')
-                                <li class="w-100">
-                                  <a class="  botonBarraNavegacion " href="{{route('equipos.index')}}" role="button" id=""> <i class="fa fa-equipo mr-lg-3"></i><span>Equipo</span></a>
-                                  
-                                </li>
-                                @endcan
-                                 <!--enlace de usuarios-->
-                                @can('perifericos.index')
-                                <li class="w-100">
-                                  <a class="  botonBarraNavegacion " href="{{route('perifericos.index')}}" role="button" id=""> <i class="fa fa-users mr-lg-3"></i><span>Perifericos</span></a>    
-                                </li>
-                                @endcan
-                                  <!--enlace de usuarios-->  
-                                   <li class="w-100">
-                                        <a class="botonBarraNavegacion" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                                            {{ __('Salir') }}
-                                        </a>
+ 
+  <script src="{{ asset ("/bower_components/admin-lte/dist/js/adminlte.min.js")}} "  type="text/javascript"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="{{ asset ("/bower_components/admin-lte/dist/js/demo.js")}} "  type="text/javascript"></script>
+  <script src="{{ asset ("/js/app.js")}} "  type="text/javascript"></script>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                                 
-                                </li>  
-                            </ul>                   
-                        </nav>
-                         <!--FIN DEL MENU LATERAL-->
-                </aside>
-                
-                 <section class="col-12 col-sm-10 mb-2">
-                    <div class="row barraHorizontalDos text-white">
-                        
-                        <div class="col p-0 d-flex justify-content-end">
-                            <a href="#" class=""><i class="fa fa-bell mr-2"></i><span>2</span></a>  
-                                                <!--Enlace de configuracion-->
-                                            <div class="dropdown"> 
-                                                    <a class="dropdown-toggle p-2 ml-3"  href="#" role="button" id="dropdownMenuLink6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Config<i class="fa fa-tools mr-3"></i><span class="caret"></span> </a>
-                                                    <div class="dropdown-menu mt-0 p-0 mr-5" aria-labelledby="dropdownMenuLink6">
-                                                        <a href="{{ route('roles.index') }}" class="dropdown-item"><i class="fa fa-user mr-3"></i><span>Roles y Permisos</span></a>
-                                                        <a href="{{ route('caracteristicas.index') }}" class="dropdown-item"><i class="fa fa-user mr-3"></i><span>caracteristicas</span></a>
-                                                         <a href="{{ route('tipos.index') }}" class="dropdown-item"><i class="fa fa-user mr-3"></i><span>tipos</span></a>
-                                                        
-                                                      
-                                                                
-                                                    </div>
-                                            </div>
-                         </div>
-                                        <!--FIN BARRA HORIZONTAL-->
-                    </div>   
-                    <main class="row d-flex flex-wrap flex-sm-nowrap p-0">
-                          <div class="col-12">
-                                @yield('content')
-                          </div>
-                    </main>
-                            
-                 </section>     
-            </div>
-        </div>
-     @endguest       
-    </div>
+   
 
-</body>
+    @yield('js')
+  </body>
 </html>

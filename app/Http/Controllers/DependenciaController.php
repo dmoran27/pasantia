@@ -18,7 +18,7 @@ class DependenciaController extends Controller
         //
         $dependencias=Dependencia::all();
         
-        //return view('dependencias.index', compact('dependencias'));
+        //return view('modules.dependencias.index', compact('dependencias'));
         return $dependencias;
     }
 
@@ -31,7 +31,7 @@ class DependenciaController extends Controller
     {
         //
          $dependencias=Dependencia::all();
-        return view('dependencias.create', compact('dependencias'));
+        return view('modules.dependencias.create', compact('dependencias'));
        
     }
 
@@ -78,7 +78,7 @@ class DependenciaController extends Controller
         //
 
         $dependencias=Dependencia::findOrFail($dependencia->id);
-        return view('dependencias.show', compact('dependencias'));
+        return view('modules.dependencias.show', compact('dependencias'));
 
 
     }
@@ -97,7 +97,7 @@ class DependenciaController extends Controller
         $dependencias=Dependencia::all();
         $enumoption = General::getEnumValues('dependencias') ;
        
-        return view('dependencias.edit', compact('dependencias'));
+        return view('modules.dependencias.edit', compact('dependencias'));
 
     }
 
