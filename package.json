@@ -19,5 +19,9 @@
         "lodash": "^4.17.4",
         "vue": "^2.5.7",
         "@fortawesome/fontawesome-free": "^5.8.0"
+    },
+    "dependencies": {
+        "laravel-echo": "^1.5.3",
+        "pusher-js": "^4.4.0"
     }
 }

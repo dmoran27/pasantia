@@ -19,7 +19,9 @@ Route::get('/', function () {
 
 
 
-
+Broadcast::channel('App.User.{id}', function ($user, $id) {
+    return (int) $user->id === (int) $id;
+});
 
 
 Auth::routes();
@@ -29,6 +31,10 @@ Route::post('/ajax', 'HomeController@store');
 	
 Route::post('posts/changeStatus', array('as' => 'changeStatus', 'uses' => 'EquipoController@changeStatus'));
 
+Route::get('events', 'EventController@index')->name('events.index');
+Route::post('events', 'EventController@addEvent')->name('events.add');
+
+Route::get('my_events', 'MyEventsController@index')->name('events.index');
 
 
 Route::resource('edificio','EdificioController');

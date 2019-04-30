@@ -270,3 +270,21 @@
       </div>
     </nav>
   </header>
+
+   <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('cffce892355820e1ec1e', {
+      cluster: 'us2',
+      forceTLS: true
+    });
+
+
+    var channel = pusher.subscribe('App.User.11');
+    channel.bind('App.User.{{ Auth::user()->id }}', function(data) {
+      alert(JSON.stringify(data));
+    });
+  </script>

@@ -36,7 +36,7 @@
 						<td>{{$equipo->identificador}}</td>
 						@can('equipos.create')
 						<td>
-							<a href="{{route('equipos.show', $equipo->id)}}" class="show-modal " data-content="{{$equipo->id}}" id="{{$equipo->id}}" ">{{$equipo->nombre}}</a>
+							<a href="{{route('equipos.show', $equipo)}}" class="show-modal " data-content="{{$equipo->id}}" id="{{$equipo->id}}" ">{{$equipo->nombre}}</a>
 						</td>
 						@endcan					
 						<td>{{$equipo->marca}}</td>
@@ -48,9 +48,7 @@
                         <td>{{date("d/m/Y", strtotime($equipo->updated_at)) }}</td>
 						<td class="d-flex justify-content-between">
 							@can('equipos.create')
-		  					<div class="col-xs-6">
-		  						<a href="{{route('equipos.edit', $equipo->id)}}" class="edit btn btn-info" ><i class="fa fa-edit"></i></a>
-		  					</div>	
+		  					<a href="{{route('equipos.edit', $equipo->id)}}" class="btn btn-success "><i class="fa fa-edit"></i></a>
 
 							@endcan
 		  					@can('equipos.create')
@@ -135,6 +133,7 @@
         </div>
     </div>
 @endsection
+
 @section('js')
      
     <script type="text/javascript">

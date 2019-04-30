@@ -10,13 +10,13 @@
     <div class="tab-content">
       <!-- Home tab content -->
       <div class="tab-pane" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <h3 class="control-sidebar-heading">Actividades Recientes</h3>
         <ul class="control-sidebar-menu">
           <li>
             <a href="javascript:void(0)">
               <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
-              <div class="menu-info">
+              <!--div class="menu-info">
                 <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
 
                 <p>Will be 23 on April 24th</p>
@@ -59,12 +59,12 @@
         </ul>
         <!-- /.control-sidebar-menu -->
 
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <h3 class="control-sidebar-heading">Progreso</h3>
         <ul class="control-sidebar-menu">
           <li>
             <a href="javascript:void(0)">
               <h4 class="control-sidebar-subheading">
-                Custom Template Design
+                
                 <span class="label label-danger pull-right">70%</span>
               </h4>
 
@@ -76,7 +76,7 @@
           <li>
             <a href="javascript:void(0)">
               <h4 class="control-sidebar-subheading">
-                Update Resume
+                
                 <span class="label label-success pull-right">95%</span>
               </h4>
 
@@ -88,7 +88,7 @@
           <li>
             <a href="javascript:void(0)">
               <h4 class="control-sidebar-subheading">
-                Laravel Integration
+                
                 <span class="label label-warning pull-right">50%</span>
               </h4>
 
@@ -100,7 +100,6 @@
           <li>
             <a href="javascript:void(0)">
               <h4 class="control-sidebar-subheading">
-                Back End Framework
                 <span class="label label-primary pull-right">68%</span>
               </h4>
 
@@ -114,74 +113,29 @@
 
       </div>
       <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- Stats tab content 
+      <div class="tab-pane" id="control-sidebar-stats-tab"></div>-->
       <!-- /.tab-pane -->
       <!-- Settings tab content -->
       <div class="tab-pane" id="control-sidebar-settings-tab">
         <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
+          <h3 class="control-sidebar-heading">Configuraciones generales</h3>
 
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
+           <ul class="sidebar-menu" data-widget="tree">
+        
+              <li>
+                <a href="{{route('roles.index')}}" class="ajax">
+                  <i class="fa fa-th"></i> <span>Roles</span>
+                </a>
+              </li>
+             
+              <li>
+                <a href="{{route('area.index')}}" class="ajax">
+                  <i class="fa fa-th"></i> <span>Areas</span>
+                </a>
+              </li>
+              
+       
           <!-- /.form-group -->
         </form>
       </div>
@@ -190,6 +144,10 @@
   </aside>
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+       immediately after the control sidebar
+  <div class="control-sidebar-bg"></div> -->
 </div>
+
+
+
+ 

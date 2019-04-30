@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use App\Equipo;
+use App\Ovservrs\ItemOvserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(120);
+        Equipo::observe(ItemObserver::class);
     }
 
     /**
@@ -27,4 +30,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+    
+
 }

@@ -33,10 +33,9 @@ class EquipoController extends Controller
     {
         //
          $page_title='Crear Equipos';
-         $dependencias=Dependencia::all();
-         $enumoption = General::getEnumValues('equipos','perteneciente') ;
-         $enumoption2 = General::getEnumValues('equipos','estado_equipO') ;
-        return view('modules.equipos.create', compact('page_title','dependencias','enumoption', 'enumoption2'));
+                 $enumoption = General::getEnumValues('equipos','perteneciente') ;
+         $enumoption2 = General::getEnumValues('equipos','estado_equipo') ;
+        return view('modules.equipos.create', compact('page_title','enumoption', 'enumoption2'));
        
     }
 
@@ -104,12 +103,11 @@ class EquipoController extends Controller
     {
         //
         
-        $equipos=Equipo::findOrFail($equipo);
-        $dependencias=Dependencia::all();
+        $equipos=Equipo::findOrFail($equipo->id);
          $enumoption = General::getEnumValues('equipos','perteneciente') ;
          $enumoption2 = General::getEnumValues('equipos','estado_equipO') ;
         $page_title='Editar Equipos';
-        return view('modules.equipos.edit', compact('page_title','equipos','dependencias','enumoption','enumoption2'));
+        return view('modules.equipos.edit', compact('page_title','equipos','enumoption','enumoption2'));
 
     }
 

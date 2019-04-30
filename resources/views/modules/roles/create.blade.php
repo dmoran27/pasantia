@@ -10,7 +10,7 @@
                 <div class="panel-body">                    
                     <form method="POST" action="{{ route('roles.store') }}" aria-label="{{ __('registrar') }}">
                         @csrf
-                        @include('roles.partials.form')
+                        @include('modules.roles.partials.form')
                         
                    </form>
                 </div>
