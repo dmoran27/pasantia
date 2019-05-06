@@ -20,8 +20,10 @@ class EquipoController extends Controller
         //
         
         $page_title='Equipos';
+        $enumoption = General::getEnumValues('equipos','perteneciente') ;
+        $enumoption2 = General::getEnumValues('equipos','estado_equipo') ;
         $equipos=Equipo::all();
-        return view('modules.equipos.index', compact('page_title','equipos'));
+        return view('modules.equipos.index', compact('page_title','equipos', 'enumoption', 'enumoption2'));
     }
 
     /**
@@ -33,9 +35,8 @@ class EquipoController extends Controller
     {
         //
          $page_title='Crear Equipos';
-                 $enumoption = General::getEnumValues('equipos','perteneciente') ;
-         $enumoption2 = General::getEnumValues('equipos','estado_equipo') ;
-        return view('modules.equipos.create', compact('page_title','enumoption', 'enumoption2'));
+         
+         return response()->json("success");
        
     }
 
@@ -71,7 +72,7 @@ class EquipoController extends Controller
                         ->withInput();
         }
          Equipo::create($request->all());
-        return redirect()->route('equipos.index');
+        return response()->json("success");
     }
 
 
@@ -101,13 +102,9 @@ class EquipoController extends Controller
      */
     public function edit(Equipo $equipo)
     {
-        //
-        
+               
         $equipos=Equipo::findOrFail($equipo->id);
-         $enumoption = General::getEnumValues('equipos','perteneciente') ;
-         $enumoption2 = General::getEnumValues('equipos','estado_equipO') ;
-        $page_title='Editar Equipos';
-        return view('modules.equipos.edit', compact('page_title','equipos','enumoption','enumoption2'));
+        return response()->json($equipos);
 
     }
 

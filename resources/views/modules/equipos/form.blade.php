@@ -9,9 +9,9 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" role="form">
-                         <div class="form-group">
-                            <label class="control-label col-md-4 " for="id">ID:</label>
-                            <div class="col-md-8 ">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 " for="id">ID:</label>
+                            <div class="col-sm-8 ">
                                 <input type="text" class="form-control" id="id_show" disabled>
                             </div>
                         </div>
@@ -20,7 +20,7 @@
                             <label for="identificador" class="col-md-4 control-label text-md-right">{{ __('Identificador') }}</label>
 
                             <div class="col-md-8">
-                                <input id="identificador" type="text" class="form-control{{ $errors->has('identificador') ? ' is-invalid' : '' }}" name="identificador"  value="{{ old('identificador') }}"  required autofocus>
+                                <input id="identificador" type="text" class="form-control{{ $errors->has('identificador') ? ' is-invalid' : '' }}" name="identificador" @if($page==='crear') value="{{ old('identificador') }}" @else value="{{$errors->has('identificador') ? old('identificador')  :  $equipos->identificador}}" required autofocus>
 
                                 @if ($errors->has('identificador'))
                                     <span class="invalid-feedback" role="alert">
@@ -34,7 +34,7 @@
                             <label for="nombre" class="col-md-4 control-label text-md-right">{{ __('Nombre') }}</label>
 
                             <div class="col-md-8">
-                                <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre"   value="{{ old('nombre') }}"  required autofocus>
+                                <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre"  @if($page==='crear') value="{{ old('nombre') }}" @else value="{{$errors->has('nombre') ? old('nombre')  :  $equipos->nombre}}" required autofocus>
 
                                 @if ($errors->has('nombre'))
                                     <span class="invalid-feedback" role="alert">
@@ -48,7 +48,7 @@
                             <label for="marca" class="col-md-4 control-label text-md-right">{{ __('Marca') }}</label>
 
                             <div class="col-md-8">
-                                <input id="marca" type="text" class="form-control{{ $errors->has('marca') ? ' is-invalid' : '' }}" name="marca"   value="{{ old('marca') }}" required autofocus>
+                                <input id="marca" type="text" class="form-control{{ $errors->has('marca') ? ' is-invalid' : '' }}" name="marca"  @if($page==='crear') value="{{ old('marca') }}" @else value="{{$errors->has('marca') ? old('marca')  :  $equipos->marca}}" required autofocus>
 
                                 @if ($errors->has('marca'))
                                     <span class="invalid-feedback" role="alert">
@@ -61,7 +61,7 @@
                             <label for="modelo" class="col-md-4 control-label text-md-right">{{ __('Modelo') }}</label>
 
                             <div class="col-md-8">
-                                <input id="modelo" type="text" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" name="modelo"   value="{{ old('modelo') }}"  required autofocus>
+                                <input id="modelo" type="text" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" name="modelo"  @if($page==='crear') value="{{ old('modelo') }}" @else value="{{$errors->has('modelo') ? old('modelo')  :  $equipos->modelo}}" required autofocus>
 
                                 @if ($errors->has('modelo'))
                                     <span class="invalid-feedback" role="alert">
@@ -74,7 +74,7 @@
                             <label for="serial" class="col-md-4 control-label text-md-right">{{ __('Serial') }}</label>
 
                             <div class="col-md-8">
-                                <input id="serial" type="text" class="form-control{{ $errors->has('serial') ? ' is-invalid' : '' }}" name="serial"  value="{{ old('serial') }}"  required autofocus>
+                                <input id="serial" type="text" class="form-control{{ $errors->has('serial') ? ' is-invalid' : '' }}" name="serial" @if($page==='crear') value="{{ old('serial') }}" @else value="{{$errors->has('serial') ? old('serial')  :  $equipos->serial}}" required autofocus>
 
                                 @if ($errors->has('serial'))
                                     <span class="invalid-feedback" role="alert">
@@ -103,7 +103,7 @@
                             <label for="observacion" class="col-md-4 control-label text-md-right">{{ __('Observacion') }}</label>
 
                             <div class="col-md-8">
-                                <textarea id="observacion" class="form-control{{ $errors->has('observacion') ? ' is-invalid' : '' }}" name="observacion"    value="{{ old('modelo') }}" required autofocus></textarea>
+                                <textarea id="observacion" class="form-control{{ $errors->has('observacion') ? ' is-invalid' : '' }}" name="observacion"   @if($page==='crear') value="{{ old('modelo') }}" @else value="{{$errors->has('modelo') ? old('modelo')  :  $equipos->modelo}}" required autofocus></textarea>
 
                                 @if ($errors->has('observacion'))
                                     <span class="invalid-feedback" role="alert">
@@ -112,9 +112,20 @@
                                 @endif
                             </div>
                         </div>
-                      
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 " for="id">Fecha de registro:</label>
+                            <div class="col-sm-8 ">
+                                <input type="text" class="form-control" id="registro_show" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 " for="id">Fecha ultima modificación:</label>
+                            <div class="col-sm-8 ">
+                                <input type="text" class="form-control" id="modificacion_show" disabled>
+                            </div>
+                        </div>
 
-                         <div class="form-group">
+                        <div class="form-group">
 
                             <div class="col-md-8">
                                 <input id="user_id" disabled class="hidden" name="user_id" value="{{ Auth::user()->id }}" required>
@@ -135,10 +146,12 @@
                        
                     </form>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal"><span>Cerrar</span></button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span>Cerrar</span></button>
                         <button type="button" class="btn btn-info agregar" data-dismiss="modal"><span>Agregar</span></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+      

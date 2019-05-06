@@ -22,10 +22,10 @@
 				<th>Marca</th>
 				<th>Modelo</th>
 				<th>Serial</th>
-				<th>Estado del equipo</th>
+				<th>Estado</th>
 				<th>Perteneciente</th>
-				<th>Fecha de registro</th>
-                <th>Fecha ultima modificación</th>
+				<th>Registro</th>
+                <th>Modificación</th>
 				<th>Acciones</th>
                 </tr>
                 </thead>
@@ -36,7 +36,7 @@
 						<td>{{$equipo->identificador}}</td>
 						@can('equipos.create')
 						<td>
-							<a href="{{route('equipos.show', $equipo)}}" class="show-modal " data-content="{{$equipo->id}}" id="{{$equipo->id}}" ">{{$equipo->nombre}}</a>
+							<a href="{{route('equipos.show', $equipo->id)}}" class="show-modal " data-content="{{$equipo->id}}" id="{{$equipo->id}}" ">{{$equipo->nombre}}</a>
 						</td>
 						@endcan					
 						<td>{{$equipo->marca}}</td>
@@ -48,11 +48,10 @@
                         <td>{{date("d/m/Y", strtotime($equipo->updated_at)) }}</td>
 						<td class="d-flex justify-content-between">
 							@can('equipos.create')
-		  					<a href="{{route('equipos.edit', $equipo->id)}}" class="btn btn-success "><i class="fa fa-edit"></i></a>
-
+                            <a href="#" class="edit-modal " data-content="{{$equipo->id}}" id="{{$equipo->id}}" "><i class="fa fa-edit"></i></a>
 							@endcan
 		  					@can('equipos.create')
-		  					<button class="delete-modal btn btn-danger" data-id="{{$equipo->id}}" data-title="{{$equipo->nombre}}" data-content="{{$equipo->identificador}}"><i class="fa fa-trash"></i></button>		
+		  					<a href="#" class="delete-modal " data-id="{{$equipo->id}}" data-title="{{$equipo->nombre}}" data-content="{{$equipo->identificador}}"><i class="fa fa-trash"></i></a>		
 
 							@endcan 
 			                       
@@ -69,10 +68,10 @@
 						<th>Marca</th>
 						<th>Modelo</th>
 						<th>Serial</th>
-						<th>Estado del equipo</th>
+						<th>Estado</th>
 						<th>Perteneciente</th>
-						<th>Fecha de registro</th>
-                   		<th>Fecha ultima modificación</th>
+						<th>Registro</th>
+                   		<th>Modificación</th>
 						<th>Acciones</th>
 	                </tr>
                 </tfoot>
@@ -88,7 +87,7 @@
       <div class="row d-flex justify-content-end ">
 			  @can('equipos.create')
 			<div class="col-md-2 ">
-				<a href="{{route('equipos.create')}}" class="btn btn-info add m-2">Agregar Nuevo Equipo</a>
+				<a href="#" id="crear-modal" class="btn btn-info add m-2 crear-modal">Agregar Nuevo Equipo</a>
 			</div>
 			  @endcan
 			
@@ -96,8 +95,13 @@
 		</div>
 
 </section>
-`  
+
      @include('modules.equipos.show')
+
+     @include('modules.equipos.create')
+
+     
+
      
     <!-- Modal form to delete a form -->
     <div id="deleteModal" class="modal fade" role="dialog">
@@ -159,7 +163,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
                 type: 'GET',
-                url: '/equipos/' + $('.show-modal').attr("id"),  
+                url: '/equipos/' + $(this).attr("id"),  
                  success: function(data){ 
                       console.log(data); 
                     				
@@ -172,8 +176,7 @@
 		            $('#modificacion_show').val("{{date('d/m/Y', strtotime("+data['created_at']+"))}}");
 		            $('#registro_show').val("{{date('d/m/Y', strtotime("+data['updated_at']+"))}}");
 		            $('#pertenece_show').val(data['perteneciente']);
-		            $('#estado_show').val(data['estado_equipo']);
-		            				
+		            $('#estado_show').val(data['estado_equipo']);            				
 					 
 	                },
                     fail: function(){
@@ -181,11 +184,10 @@
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                    }    
+                    },    
             });
         });
-
-
+        
         // delete a post
         $(document).on('click', '.delete-modal', function() {
             $('.modal-title').text('Eliminar');
@@ -220,5 +222,66 @@
             });
         });
 
+        //mostrar crear equipo
+         $(document).on('click', '.crear-modal', function(e) {
+             e.preventDefault();
+                $('.modal-title').text('Agregar equipo');
+                $('#crearModal').modal('show')
+            
+                    $('#id').val();
+                    $('#title').val();
+                    $('#identificador').val();
+                    $('#marca').val();
+                    $('#modelo').val();
+                    $('#serial').val();
+                    $('#modificacion').val();
+                    $('#registro').val();
+                    $('#pertenece').val();
+                    $('#estado').val();
+                    $('#estado_equipo').html("<select class='form-control{{ $errors->has('estado_equipo') ? ' is-invalid' : '' }}' name='estado_equipo'>@foreach($enumoption as $estado_equipo)<option value='{{$estado_equipo}}' selected > {{$estado_equipo}} </option> @endforeach </select>"); 
+                    $('#perteneciente').html("<select class='form-control{{ $errors->has('perteneciente') ? ' is-invalid' : '' }}' name='perteneciente' @foreach($enumoption2 as $perteneciente)<option value='{{$perteneciente}}' selected > {{$perteneciente}} </option>@endforeach </select>"); 
+                    
+                   
+        });
+       
+        // Show a post
+        $(document).on('click', '.edit-modal', function(e) {
+             e.preventDefault();
+                $('.modal-title').text('Detalles del equipo');
+                $('#editModal').modal('show')
+             
+            $.ajax({
+                 headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: 'GET',
+                url: '/equipos/' + $(this).attr("id"),  
+                 success: function(data){ 
+                      console.log(data); 
+                                    
+                    $('#id_show').val(data['id']);
+                    $('#title_show').val(data['nombre']);
+                    $('#identificador_show').val(data['identificador']);
+                    $('#marca_show').val(data['marca']);
+                    $('#modelo_show').val(data['modelo']);
+                    $('#serial_show').val(data['serial']);
+                    $('#modificacion_show').val("{{date('d/m/Y', strtotime("+data['created_at']+"))}}");
+                    $('#registro_show').val("{{date('d/m/Y', strtotime("+data['updated_at']+"))}}");
+                    $('#pertenece_show').val(data['perteneciente']);
+                    $('#estado_show').val(data['estado_equipo']);                           
+                     
+                    },
+                    fail: function(){
+                       console.log("error al cargar pagina"); 
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    },    
+            });
+        });
+        
+
     </script>
 @endsection
+
+  

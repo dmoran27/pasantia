@@ -1,22 +1,40 @@
-@extends('layouts.app')
-@section('content')
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Editar') }}</div>
+ <!-- Modal form to show a post -->
+    <div id="editModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 " for="id">ID:</label>
+                            <div class="col-sm-8 ">
+                                <input type="text" class="form-control" id="id_show" disabled>
+                            </div>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="identificador" class="col-md-4 control-label text-md-right">{{ __('Identificador') }}</label>
 
-                <div class="card-body">
-                     <form method="POST" action="{{route('equipos.update', $equipos)}}" aria-label="{{ __('Editar') }}">
-                        @csrf
-                            {!!method_field('PUT')!!}
+                            <div class="col-md-8">
+                                <input id="identificador" type="text" class="form-control{{ $errors->has('identificador') ? ' is-invalid' : '' }}" name="identificador"  value="{{$errors->has('identificador') ? old('identificador')  :  $equipos->identificador}}" required autofocus>
 
-                        <div class="form-group row">
-                            <label for="nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+                                @if ($errors->has('identificador'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('identificador') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nombre" class="col-md-4 control-label text-md-right">{{ __('Nombre') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" value="{{$errors->has('nombre') ? old('nombre')  :  $equipos->nombre}}">
+                            <div class="col-md-8">
+                                <input id="nombre" type="text" class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre"  value="{{$errors->has('nombre') ? old('nombre')  :  $equipos->nombre}}" required autofocus>
 
                                 @if ($errors->has('nombre'))
                                     <span class="invalid-feedback" role="alert">
@@ -26,25 +44,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="identificador" class="col-md-4 col-form-label text-md-right">{{ __('Identificador') }}</label>
+                        <div class="form-group">
+                            <label for="marca" class="col-md-4 control-label text-md-right">{{ __('Marca') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="identificador" type="text" class="form-control{{ $errors->has('identificador') ? ' is-invalid' : '' }}" name="identificador" value="{{$errors->has('identificador') ? old('identificador')  :  $equipos->identificador}}">
-
-                                @if ($errors->has('identificador'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('identificador') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="marca" class="col-md-4 col-form-label text-md-right">{{ __('marca') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="marca" type="text" class="form-control{{ $errors->has('marca') ? ' is-invalid' : '' }}" name="marca" value="{{$errors->has('marca') ? old('marca')  :  $equipos->marca}}">
+                            <div class="col-md-8">
+                                <input id="marca" type="text" class="form-control{{ $errors->has('marca') ? ' is-invalid' : '' }}" name="marca" value="{{$errors->has('marca') ? old('marca')  :  $equipos->marca}}" required autofocus>
 
                                 @if ($errors->has('marca'))
                                     <span class="invalid-feedback" role="alert">
@@ -53,11 +57,11 @@
                                 @endif
                             </div>
                         </div>
-                         <div class="form-group row">
-                            <label for="modelo" class="col-md-4 col-form-label text-md-right">{{ __('modelo') }}</label>
+                        <div class="form-group">
+                            <label for="modelo" class="col-md-4 control-label text-md-right">{{ __('Modelo') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="modelo" type="text" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" name="modelo" value="{{$errors->has('modelo') ? old('modelo')  :  $equipos->modelo}}">
+                            <div class="col-md-8">
+                                <input id="modelo" type="text" class="form-control{{ $errors->has('modelo') ? ' is-invalid' : '' }}" name="modelo"  value="{{$errors->has('modelo') ? old('modelo')  :  $equipos->modelo}}" required autofocus>
 
                                 @if ($errors->has('modelo'))
                                     <span class="invalid-feedback" role="alert">
@@ -66,11 +70,11 @@
                                 @endif
                             </div>
                         </div>
-                         <div class="form-group row">
-                            <label for="serial" class="col-md-4 col-form-label text-md-right">{{ __('serial') }}</label>
+                        <div class="form-group">
+                            <label for="serial" class="col-md-4 control-label text-md-right">{{ __('Serial') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="serial" type="text" class="form-control{{ $errors->has('serial') ? ' is-invalid' : '' }}" name="serial" value="{{$errors->has('serial') ? old('serial')  :  $equipos->serial}}">
+                            <div class="col-md-8">
+                                <input id="serial" type="text" class="form-control{{ $errors->has('serial') ? ' is-invalid' : '' }}" name="serial" value="{{$errors->has('serial') ? old('serial')  :  $equipos->serial}}" required autofocus>
 
                                 @if ($errors->has('serial'))
                                     <span class="invalid-feedback" role="alert">
@@ -79,82 +83,75 @@
                                 @endif
                             </div>
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="estado_equipo" class="col-md-4 control-label text-md-right">{{ __('Estado del equipo') }}</label>
 
-
-                        <div class="form-group row">
-                            <label for="perteneciente" class="col-md-4 col-form-label text-md-right">{{ __('perteneciente') }}</label>
-
-                            <div class="col-md-6">
-                               
-                                  <select class="form-control{{ $errors->has('perteneciente') ? ' is-invalid' : '' }}" name="perteneciente">
-                                    @foreach($enumoption as $perteneciente)
-                                        <option value="{{$perteneciente}}" @if($perteneciente === $equipos->perteneciente) selected @endif >{{$perteneciente}}</option>
-                                    @endforeach
-
-                                </select>
-
-                                @if ($errors->has('perteneciente'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('perteneciente') }}</strong>
-                                    </span>
-                                @endif
+                            <div class="col-md-8" id="estado_equipo">
+  
                             </div>
                         </div>
-                       <div class="form-group row">
-                            <label for="estado_equipo" class="col-md-4 col-form-label text-md-right">{{ __('estado_equipo de Cliente') }}</label>
+                       <div class="form-group">
+                            <label for="perteneciente" class="col-md-4 control-label text-md-right">{{ __('Pertenece al la institucion? ') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-8" id="perteneciente">
                                
-                                  <select class="form-control{{ $errors->has('estado_equipo') ? ' is-invalid' : '' }}" name="estado_equipo">
-                                    @foreach($enumoption2 as $estado_equipo)
-                                        <option value="{{$estado_equipo}}" @if($estado_equipo === $equipos->estado_equipo) selected @endif >{{$estado_equipo}}</option>
-                                    @endforeach
-
-                                </select>
-
-                                @if ($errors->has('estado_equipo'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('estado_equipo') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div> 
-                        <div class="form-group row">
-                            <label for="serial" class="col-md-4 col-form-label text-md-right">{{ __('serial') }}</label>
+                         
+                        <div class="form-group">
+                            <label for="observacion" class="col-md-4 control-label text-md-right">{{ __('Observacion') }}</label>
 
-                            <div class="col-md-6">
-                                <textarea id="serial" type="text" class="form-control{{ $errors->has('serial') ? ' is-invalid' : '' }}" name="serial" value="{{$errors->has('serial') ? old('serial')  :  $equipos->serial}}"></textarea> 
+                            <div class="col-md-8">
+                                <textarea id="observacion" class="form-control{{ $errors->has('observacion') ? ' is-invalid' : '' }}" name="observacion"  value="{{$errors->has('modelo') ? old('modelo')  :  $equipos->modelo}}" required autofocus></textarea>
 
-                                @if ($errors->has('serial'))
+                                @if ($errors->has('observacion'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('serial') }}</strong>
+                                        <strong>{{ $errors->first('observacion') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6">
-                                <input id="user_id" type="hidden" class="hidden" name="user_id" value="{{ Auth::user()->id }}" required>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 " for="id">Fecha de registro:</label>
+                            <div class="col-sm-8 ">
+                                <input type="text" class="form-control" id="registro_show" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4 " for="id">Fecha ultima modificación:</label>
+                            <div class="col-sm-8 ">
+                                <input type="text" class="form-control" id="modificacion_show" disabled>
                             </div>
                         </div>
 
+                        <div class="form-group">
+
+                            <div class="col-md-8">
+                                <input id="user_id" disabled class="hidden" name="user_id" value="{{ Auth::user()->id }}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-md-8">
+                                <input id="user_id" type="hidden" class="hidden" name="tipo_id" value="1" required>
+                            </div>
+                        </div>
 
                        
                        
                    
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Regitrar') }}
-                                </button>
-                            </div>
-                        </div>
+                       
+                       
                     </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span>Cerrar</span></button>
+                        <button type="button" class="btn btn-info agregar" data-dismiss="modal"><span>Agregar</span></button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+    
+      

@@ -128,6 +128,12 @@
                   <i class="fa fa-th"></i> <span>Roles</span>
                 </a>
               </li>
+
+              <li>
+                <a href="{{route('roles.index')}}" class="ajax">
+                  <i class="fa fa-th"></i> <span>Roles</span>
+                </a>
+              </li>
              
               <li>
                 <a href="{{route('area.index')}}" class="ajax">

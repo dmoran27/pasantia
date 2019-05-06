@@ -12,61 +12,61 @@
                         <div class="form-group">
                             <label class="control-label col-sm-4 " for="id">ID:</label>
                             <div class="col-sm-8 ">
-                                <input type="text" class="form-control" id="id_show" disabled>
+                                <input type="text" class="form-control" id="id_show" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4 " for="id">Identificador:</label>
                             <div class="col-sm-8 ">
-                                <input type="text" class="form-control" id="identificador_show" disabled>
+                                <input type="text" class="form-control" id="identificador_show" >
                             </div>
                         </div>
                         <div class="form-group">
                         	<label class="control-label col-sm-4 " for="id">Nombre:</label>
                             <div class="col-sm-8 ">
-                                <input type="name" class="form-control" id="title_show" disabled>
+                                <input type="name" class="form-control" id="title_show" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4 " for="id">Marca:</label>
                             <div class="col-sm-8 ">
-                                <input type="text" class="form-control" id="marca_show" disabled>
+                                <input type="text" class="form-control" id="marca_show" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4 " for="id">Modelo:</label>
                             <div class="col-sm-8 ">
-                                <input type="text" class="form-control" id="modelo_show" disabled>
+                                <input type="text" class="form-control" id="modelo_show" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4 " for="id">Serial:</label>
                             <div class="col-sm-8 ">
-                                <input type="text" class="form-control" id="serial_show" disabled>
+                                <input type="text" class="form-control" id="serial_show" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4 " for="id">Estado Del Equipo:</label>
                             <div class="col-sm-8 ">
-                                <input type="text" class="form-control" id="estado_show" disabled>
+                                <input type="text" class="form-control" id="estado_show" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4 " for="id">Pertenece a la intitución?:</label>
                             <div class="col-sm-8 ">
-                                <input type="text" class="form-control" id="pertenece_show" disabled>
+                                <input type="text" class="form-control" id="pertenece_show" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4 " for="id">Fecha de registro:</label>
                             <div class="col-sm-8 ">
-                                <input type="text" class="form-control" id="registro_show" disabled>
+                                <input type="text" class="form-control" id="registro_show" >
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4 " for="id">Fecha ultima modificación:</label>
                             <div class="col-sm-8 ">
-                                <input type="text" class="form-control" id="modificacion_show" disabled>
+                                <input type="text" class="form-control" id="modificacion_show" >
                             </div>
                         </div>
                         	
