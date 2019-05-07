@@ -103,7 +103,7 @@ class EquipoController extends Controller
     public function edit(Equipo $equipo)
     {
                
-        $equipos=Equipo::findOrFail($equipo->id);
+        $equipos=Equipo::findOrFail($equipo);
         return response()->json($equipos);
 
     }

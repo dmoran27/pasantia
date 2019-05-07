@@ -84,17 +84,17 @@
                             </div>
                         </div>
                         
-                        <div class="form-group">
+                        <div class="form-group" id="estado_equipo">
                             <label for="estado_equipo" class="col-md-4 control-label text-md-right">{{ __('Estado del equipo') }}</label>
 
-                            <div class="col-md-8" id="estado_equipo">
+                            <div class="col-md-8" >
   
                             </div>
                         </div>
-                       <div class="form-group">
+                       <div class="form-group" id="perteneciente">
                             <label for="perteneciente" class="col-md-4 control-label text-md-right">{{ __('Pertenece al la institucion? ') }}</label>
 
-                            <div class="col-md-8" id="perteneciente">
+                            <div class="col-md-8" >
                                
                             </div>
                         </div> 

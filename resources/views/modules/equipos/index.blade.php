@@ -7,12 +7,12 @@
       <div class="row">
         <div class="col-xs-12">
          
-          <div class="box">
+          <div class="box" >
             <div class="box-header">
               <h3 class="box-title">Tabla de equipos</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body" style="overflow-x: scroll;">
               <table id="" class="dataTable1 table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -36,7 +36,9 @@
 						<td>{{$equipo->identificador}}</td>
 						@can('equipos.create')
 						<td>
-							<a href="{{route('equipos.show', $equipo->id)}}" class="show-modal " data-content="{{$equipo->id}}" id="{{$equipo->id}}" ">{{$equipo->nombre}}</a>
+							<a href="{{route('equipos.show', $equipo->id)}}" class="show-modal mostrar" data-content="{{$equipo->id}}" id="{{$equipo->id}}">
+                                {{$equipo->nombre}}
+                            </a>
 						</td>
 						@endcan					
 						<td>{{$equipo->marca}}</td>
@@ -47,15 +49,14 @@
 						 <td>{{date("d/m/Y", strtotime($equipo->created_at)) }}</td>
                         <td>{{date("d/m/Y", strtotime($equipo->updated_at)) }}</td>
 						<td class="d-flex justify-content-between">
-							@can('equipos.create')
-                            <a href="#" class="edit-modal " data-content="{{$equipo->id}}" id="{{$equipo->id}}" "><i class="fa fa-edit"></i></a>
+							@can('equipos.edit')
+                            <a href="{{route('equipos.edit', $equipo->id)}}" class="show-modal editar" data-content="{{$equipo->id}}" id="{{$equipo->id}}"
+                                ><i class="fa fa-edit"></i>
+                            </a>
 							@endcan
-		  					@can('equipos.create')
+		  					@can('equipos.delete')
 		  					<a href="#" class="delete-modal " data-id="{{$equipo->id}}" data-title="{{$equipo->nombre}}" data-content="{{$equipo->identificador}}"><i class="fa fa-trash"></i></a>		
-
-							@endcan 
-			                       
-                                        
+							@endcan 	                           
 						</td>
 					</tr>
                 @endforeach
@@ -87,7 +88,7 @@
       <div class="row d-flex justify-content-end ">
 			  @can('equipos.create')
 			<div class="col-md-2 ">
-				<a href="#" id="crear-modal" class="btn btn-info add m-2 crear-modal">Agregar Nuevo Equipo</a>
+				<a href="#" id="crear-modal" class="btn btn-primary add m-2 crear-modal">Agregar Nuevo Equipo</a>
 			</div>
 			  @endcan
 			
@@ -95,14 +96,26 @@
 		</div>
 
 </section>
+     <div id="showModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    @include('modules.equipos.form')
 
-     @include('modules.equipos.show')
-
-     @include('modules.equipos.create')
-
-     
-
-     
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+       
     <!-- Modal form to delete a form -->
     <div id="deleteModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -141,7 +154,9 @@
 @section('js')
      
     <script type="text/javascript">
-		//Config DataTable
+        /************************************************
+            Configurar DataTable
+        *********************************************************/
 		$('.dataTable1').DataTable({
 	      'paging'      : true,
 	      'lengthChange': true,
@@ -152,14 +167,33 @@
 	    });
 
 		//-- AJAX CRUD operations -->
-         // Show a post
+
+
+        /************************************************
+            Mostrar y editar equipos
+        *********************************************************/
         $(document).on('click', '.show-modal', function(e) {
         	 e.preventDefault();
-        	 	$('.modal-title').text('Detalles del equipo');
-        	 	$('#showModal').modal('show')
-        	 
+             var dis;
+             if($(this).hasClass("editar")){
+               $("#showModal form *").children().prop('disabled',false);
+                $('.modal-title').text('editar equipo');
+                $('#showModal').modal('show');
+                $('#showModal .modal-footer').html("<button type='button' class='btn btn-primary edit' data-dismiss='modal'> Guardar </button>");
+             }else{
+                dis="disabled";
+                $("#showModal form *").children().prop('disabled',true);
+                $('.modal-title').text('Detalles del equipo');
+                $('#showModal').modal('show');
+                $('#showModal .modal-footer').html("<button type='button' id='edit' class='btn btn-primary edit' data-dismiss='modal'> editar </button>");
+                $('.edit').on('click', function(){
+                    $("#showModal form *").children().prop('disabled',false);
+                        $('#showModal .modal-footer').html("<button type='button' class='btn btn-primary edit' data-dismiss='modal'> Guardar </button>");
+                    });
+                }
+              
             $.ajax({
-            	 headers: {
+            	headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
                 type: 'GET',
@@ -167,16 +201,18 @@
                  success: function(data){ 
                       console.log(data); 
                     				
-		            $('#id_show').val(data['id']);
+		          
 		            $('#title_show').val(data['nombre']);
 		            $('#identificador_show').val(data['identificador']);
 		            $('#marca_show').val(data['marca']);
 		            $('#modelo_show').val(data['modelo']);
 		            $('#serial_show').val(data['serial']);
-		            $('#modificacion_show').val("{{date('d/m/Y', strtotime("+data['created_at']+"))}}");
-		            $('#registro_show').val("{{date('d/m/Y', strtotime("+data['updated_at']+"))}}");
-		            $('#pertenece_show').val(data['perteneciente']);
-		            $('#estado_show').val(data['estado_equipo']);            				
+		           
+
+
+		            $('#estado_equipo').html("<label for='estado_equipo' class='col-sm-4 control-label text-md-right'>{{ __('Estado del equipo') }}</label><div class='col-sm-8'><select class='form-control{{ $errors->has('estado_equipo') ? ' is-invalid' : '' }}' name='estado_equipo'"+dis+">@foreach($enumoption as $estado_equipo)<option value='{{$estado_equipo}}' selected  > {{$estado_equipo}} </option> @endforeach </select></div>"); 
+
+                    $('#perteneciente').html(" <label for='perteneciente' class='col-sm-4 control-label text-md-right' name='perteneciente'>{{ __('Pertenece al la institucion? ') }}</label><div class='col-sm-8'><select class='form-control{{ $errors->has('perteneciente') ? ' is-invalid' : '' }}' name='perteneciente' "+dis+">@foreach($enumoption2 as $perteneciente)<option value='{{$perteneciente}}' selected  > {{$perteneciente}} </option>@endforeach</select></div>");  				
 					 
 	                },
                     fail: function(){
@@ -187,8 +223,32 @@
                     },    
             });
         });
-        
-        // delete a post
+         /************************************************
+            Editar equipos
+        *********************************************************/
+       
+        $('.modal-footer').on('click', 'edit', function() {
+            $.ajax({
+                 headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                type: 'PUT',
+                url: '/equipos/' + $('#id_delete').val() ,             
+                
+                    
+                 success: function(data){ 
+                      },
+                    fail: function(){
+                       console.log("error al cargar pagina"); 
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }    
+            });
+        });
+       /************************************************
+            Eliminar equipos
+        *********************************************************/
         $(document).on('click', '.delete-modal', function() {
             $('.modal-title').text('Eliminar');
             $('#id_delete').val($(this).data('id'));
@@ -222,11 +282,13 @@
             });
         });
 
-        //mostrar crear equipo
+        /************************************************
+            Crear equipos
+        *********************************************************/
          $(document).on('click', '.crear-modal', function(e) {
              e.preventDefault();
                 $('.modal-title').text('Agregar equipo');
-                $('#crearModal').modal('show')
+                $('#crearModal').modal('show');
             
                     $('#id').val();
                     $('#title').val();
@@ -239,48 +301,32 @@
                     $('#pertenece').val();
                     $('#estado').val();
                     $('#estado_equipo').html("<select class='form-control{{ $errors->has('estado_equipo') ? ' is-invalid' : '' }}' name='estado_equipo'>@foreach($enumoption as $estado_equipo)<option value='{{$estado_equipo}}' selected > {{$estado_equipo}} </option> @endforeach </select>"); 
-                    $('#perteneciente').html("<select class='form-control{{ $errors->has('perteneciente') ? ' is-invalid' : '' }}' name='perteneciente' @foreach($enumoption2 as $perteneciente)<option value='{{$perteneciente}}' selected > {{$perteneciente}} </option>@endforeach </select>"); 
-                    
-                   
+                    $('#perteneciente').html("<select class='form-control{{ $errors->has('perteneciente') ? ' is-invalid' : '' }}' name='perteneciente' @foreach($enumoption2 as $perteneciente)<option value='{{$perteneciente}}' selected > {{$perteneciente}} </option>@endforeach </select>");           
         });
-       
-        // Show a post
-        $(document).on('click', '.edit-modal', function(e) {
-             e.preventDefault();
-                $('.modal-title').text('Detalles del equipo');
-                $('#editModal').modal('show')
-             
+         $('.modal-footer').on('click', '.crear', function() {
             $.ajax({
                  headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 },
-                type: 'GET',
-                url: '/equipos/' + $(this).attr("id"),  
+                type: 'PUT',
+                url: '/equipos/create' ,
+               
+                
+                    
                  success: function(data){ 
-                      console.log(data); 
-                                    
-                    $('#id_show').val(data['id']);
-                    $('#title_show').val(data['nombre']);
-                    $('#identificador_show').val(data['identificador']);
-                    $('#marca_show').val(data['marca']);
-                    $('#modelo_show').val(data['modelo']);
-                    $('#serial_show').val(data['serial']);
-                    $('#modificacion_show').val("{{date('d/m/Y', strtotime("+data['created_at']+"))}}");
-                    $('#registro_show').val("{{date('d/m/Y', strtotime("+data['updated_at']+"))}}");
-                    $('#pertenece_show').val(data['perteneciente']);
-                    $('#estado_show').val(data['estado_equipo']);                           
-                     
+                      
+                    $('.item' + data['id']).remove();
+                     console.log(data['id']); 
                     },
                     fail: function(){
                        console.log("error al cargar pagina"); 
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                    },    
+                    }    
             });
         });
-        
-
+       
     </script>
 @endsection
 
